@@ -17,6 +17,9 @@ Associate Cat is a two-skill workflow for software development. Start by describ
 
 **Why does this also fit mid-sized and large game projects?** A single request in these projects often crosses runtime code, editor tooling, assets and configuration, build scripts, and validation projects, while the relevant logic may be spread across several modules. Instead of analyzing the whole repository up front, `cat-plan` starts from the feature or bug you describe, finds the module that actually owns it, and follows only the dependencies, project rules, and validation paths that can change the plan. That exposes the connections behind a local change while leaving unrelated systems out of scope; actual results still depend on the project materials, model, and host capabilities.
 
+
+Associate Cat's public version and documentation were themselves planned and refined using Associate Cat.
+
 ## Quick Start
 
 Install both skills with:
