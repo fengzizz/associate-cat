@@ -1,6 +1,6 @@
 # Associate Cat
 
-[![skills.sh](https://skills.sh/b/fengzizz/associate-cat)](https://skills.sh/fengzizz/associate-cat)
+[View on skills.sh](https://skills.sh/fengzizz/associate-cat)
 
 [简体中文](README.zh-CN.md)
 
