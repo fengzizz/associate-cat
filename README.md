@@ -8,6 +8,8 @@ Associate Cat is a two-skill workflow for software development. Start by describ
 
 `cat-plan` investigates, corrects, designs, and plans. `cat-code` implements and validates only after you explicitly request it and the scope is closed—and stops when the work needs new design or broader scope.
 
+Associate Cat provides general-purpose AI skills for software development, covering AI planning, software planning, and scope-controlled code implementation. It organizes requirement analysis, bug investigation, technical design, task breakdown, and validation into a project-grounded coding agent workflow.
+
 ## Why Associate Cat
 
 - **Start with the project.** The skills inspect applicable rules, code, documentation, and validation entry points before forming a recommendation.
