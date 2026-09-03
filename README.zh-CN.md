@@ -8,6 +8,8 @@ Associate Cat 是一组面向软件开发的双 Skill 工作流。你可以先�
 
 `cat-plan` 负责调查、纠偏、设计和计划；`cat-code` 只在你明确要求实施且范围已经闭合时修改和验证，并在需要新设计或扩大范围时停下来说明问题。
 
+Associate Cat 是一套面向软件开发的通用 AI Skills，覆盖 AI planning、软件规划和范围受控的代码实施。它把需求分析、Bug 调查、技术方案、任务拆分与验证组织成基于项目事实的 coding agent workflow。
+
 ## 为什么选择 Associate Cat
 
 - **从当前项目开始。** 两个 Skill 会先读取适用规则、代码、文档和验证入口，再形成判断。
