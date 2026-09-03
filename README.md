@@ -1,5 +1,7 @@
 # Associate Cat
 
+[![skills.sh](https://skills.sh/b/fengzizz/associate-cat)](https://skills.sh/fengzizz/associate-cat)
+
 [简体中文](README.zh-CN.md)
 
 Associate Cat is a two-skill workflow for software development. Start by describing a requirement or bug in your own words; `cat-plan` investigates it in the context of the project and produces a plan you can review and refine. Reviewing the plan means reviewing the AI's reasoning, which is faster and more direct than judging its direction from code after the fact.

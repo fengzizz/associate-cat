@@ -1,5 +1,7 @@
 # Associate Cat
 
+[![skills.sh](https://skills.sh/b/fengzizz/associate-cat)](https://skills.sh/fengzizz/associate-cat)
+
 [English](README.md)
 
 Associate Cat 是一组面向软件开发的双 Skill 工作流。你可以先用自己的话说明需求或 Bug；`cat-plan` 会结合当前项目调查问题并形成一份可审阅、可继续修订的计划。审阅这份计划，就是在审阅 AI 的分析思路，比事后从代码改动中判断方向更快、更直接。
