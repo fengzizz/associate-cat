@@ -39,6 +39,15 @@ UE5 游戏项目就是一个例子。这类项目往往代码量比较大，状�
 
 Associate Cat 的仓库和文档，也是通过这套 Plan→Code 流程来维护的。
 
+## 真实案例
+
+下面两份 Plan 来自真实的 Codex 交互，可以直观看到这套工作流最终会产出什么：
+
+- [审阅 Anim Retarget Magic 中一个 Solver 的预期行为](examples/plans/plan_fikrig_magic_thik_goal_solver_review.md)：从配置、Transform 计算和 Curve 输入，一直梳理到 Pose 输出、Editor 工具与旧版数据转换。它遵守了用户“不考虑缺陷”的范围要求，最后整理出四项可以执行的验证任务。
+- [调查 UE 5.8 Sphere Sweep 的接触点偏移](examples/plans/plan_ue58_sphere_sweep_contact_offset.md)：从 `ImpactPoint` 异常一路追到 Chaos 中的具体计算，并用独立计算复核结果。由于还不知道实际调用位置和 Physics Asset，方案如实停在 `Partially Ready`，没有凭空补出项目侧修复方式。
+
+[案例说明](examples/plans/README.md)列出了两次任务的原始请求、最终结果和验证边界。
+
 ## 快速开始
 
 使用以下命令安装两个 Skill：

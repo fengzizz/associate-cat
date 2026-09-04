@@ -39,6 +39,15 @@ A UE5 game project is one example. It may have a large codebase, complex state, 
 
 We use the same Plan→Code workflow to maintain Associate Cat and its documentation.
 
+## Real-world examples
+
+Two plans generated from real Codex conversations show what the workflow produces in practice:
+
+- [Reviewing intended behavior in Anim Retarget Magic](examples/plans/plan_fikrig_magic_thik_goal_solver_review.md) follows one solver through configuration, transform logic, curve input, pose output, editor tooling, and legacy conversion. It honors the user's instruction to disregard defects and ends with four ready validation tasks.
+- [Investigating a UE 5.8 sphere-sweep contact offset](examples/plans/plan_ue58_sphere_sweep_contact_offset.md) traces a reported `ImpactPoint` error into Chaos, verifies the error with an independent calculation, and stops at `Partially Ready` because the real caller and asset are still unknown.
+
+See the [examples guide](examples/plans/README.md) for the original requests, results, and validation limits.
+
 ## Quick Start
 
 Install both skills with:

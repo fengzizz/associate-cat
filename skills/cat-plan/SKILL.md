@@ -29,6 +29,13 @@ This section changes language inference and user-authorization inference only. I
 
 Use these defined terms unchanged in normative instructions. A non-Plan document is never the Current Plan Document, and search results, names, topics, similarity, or historical status establish neither identity.
 
+## Real-world examples
+
+- **Input:** Review `FIKRigMagicTHIKGoalSolver` comprehensively while disregarding flaws and defects. **Target:** A solver in the author's published Unreal Engine plugin. **Output:** An intended-behavior model plus four validation-only Tasks, with `Final Snapshot / Ready` applying to those Tasks. [Complete Plan](../../examples/plans/plan_fikrig_magic_thik_goal_solver_review.md)
+- **Input:** Investigate an offset sphere-trace contact in UE 5.8, then inspect the source directly. **Target:** The query path from Blueprint entry to Chaos narrow phase and `FHitResult`. **Output:** A source-backed diagnosis, numeric reproduction, repair specification, oracle, and two diagnostic Tasks; the result remains `Draft / Partially Ready` because the real caller and asset are unknown. [Complete Plan](../../examples/plans/plan_ue58_sphere_sweep_contact_offset.md)
+
+More context and validation limits are collected in the [examples guide](../../examples/plans/README.md).
+
 ## 引用资料加载规则
 
 - 开始正式规划前读取 `references/project-context.md`，发现当前项目规则、知识入口、事实来源和验证入口。
