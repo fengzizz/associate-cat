@@ -4,28 +4,40 @@
 
 [简体中文](README.zh-CN.md)
 
-Associate Cat is a lightweight, skill-based workflow harness for collaborative AI coding. It works inside the coding agent you already use, keeping project context, decisions, implementation scope, and validation connected from the first conversation to the finished change.
+Associate Cat is a lightweight workflow harness for AI coding. It provides two skills for your coding agent: one to help you work out a plan, and another to make and check the changes.
 
-Start with whatever you have: a rough idea, a stubborn bug, or a change you have not fully thought through yet. Talk to the AI as you would to a teammate. `cat-plan` reads the project, works out what matters, and turns the conversation into a plan you can challenge and refine. When the direction feels right, `cat-code` carries out the agreed work and checks the result.
+Start with a rough idea, a stubborn bug, or a change you're still thinking through. Tell the AI what you know, as you would a teammate. You can work out the details together.
+
+`cat-plan` is the core of the workflow. It reads the relevant code and documentation, weighs the options, and writes a plan for you to review. Check its understanding of the problem and its proposed design, then tell it what you'd like to change. When you're ready, ask `cat-code` to implement the plan and check the results.
 
 ## Why Associate Cat
 
-- **Start with an incomplete idea.** A few thoughts, the result you want, or the symptom you are seeing are enough for `cat-plan` to begin.
-- **Work from the codebase, not just the prompt.** The skills read the relevant rules, code, documentation, and validation paths before suggesting an approach.
-- **Follow the problem, not the whole codebase.** `cat-plan` follows only the code and dependencies that matter, giving each problem the context it needs.
-- **Review the direction before any code is written.** If the AI misunderstood something or picked the wrong scope, you can fix the plan before that turns into rework.
-- **Use as much workflow as the task needs.** Stop after analysis, use Plan→Code for involved work, or send a small, well-defined change straight to `cat-code`.
-- **Keep planning and implementation connected.** The agreed design, scope, tasks, and checks stay together in one document that `cat-code` can follow.
+- **Start before you have all the answers.** Describe what you want to build or what's going wrong. `cat-plan` helps you work out the requirements and an approach.
+- **Get a plan that fits your project.** Both skills read the relevant code, project rules, and documentation, including how to check changes.
+- **Keep the investigation focused.** `cat-plan` follows the code and dependencies that matter to the problem, without scanning unrelated parts of the repository.
+- **Review the plan before code.** If the AI misunderstands a requirement, puts a feature in the wrong module, or proposes too much work, correct the plan before it writes code.
+- **Choose the workflow you need.** Stop after analysis, send a small change straight to `cat-code`, or plan a complex task before implementing it.
+- **Hand over what you've agreed on.** The design, scope, tasks, and checks stay in one document that `cat-code` can follow when making and verifying changes.
+
+## What Makes Cat Plan Different
+
+- **Review the results at every stage.** The plan records the AI's understanding of your request, the scope it has set, and the related parts of the project it examined. It then presents a proposed design and breaks the work into tasks. You can review each result and ask for corrections before implementation if the AI misunderstood something or took the design in the wrong direction.
+- **Think through the requirements together.** Reading a plan may reveal a missing constraint or give you a new idea. Tell Cat Plan what to revise. You can return to the same document when you pick up the discussion later.
+- **Let the project answer routine questions.** Cat Plan investigates the information available in the project and handles routine technical decisions. It comes to you for business trade-offs, personal preferences, and significant risks.
+
+Cat Plan grew out of the author's day-to-day work on a project. After using and refining it over time, the author adapted it for other projects.
+
+**A practical tip:** If a task needs several discussions or sessions, ask the AI to save the plan as a Markdown file and keep it up to date. You can read it, suggest changes, and hand it to Cat Code when you're ready to implement it.
 
 ## Where Associate Cat Helps
 
-- **A feature or change that is still taking shape.** Bring the rough idea to `cat-plan`; it will investigate the project, work through the details, and turn it into a practical plan.
-- **A bug, refactor, code review, or design review.** Let `cat-plan` trace the relevant code and dependencies. It can give you its findings or turn them into a concrete plan.
-- **Work that is ready to implement.** Send a small, clear change directly to `cat-code`, or hand over an agreed plan for implementation and validation.
+- **A feature or change that's still taking shape.** Bring your goal and initial ideas to `cat-plan` and work through possible approaches.
+- **Bug investigation, refactoring, code review, or design review.** Ask `cat-plan` to examine the relevant code and dependencies. It can give you findings or turn them into a plan for changes.
+- **Changes you're ready to make.** Ask `cat-code` to handle a small, clear change directly or implement a plan you've already reviewed.
 
-Game projects are a good example: they are often large, full of interacting systems and complex state, and spread across many technical domains. Starting with one feature or bug, `cat-plan` finds the code and project rules that matter and turns that context into a plan you can review and hand off.
+A UE5 game project is one example. It may have a large codebase, complex state, and systems that depend on one another. Cat Plan examines the code and project rules relevant to a feature or bug, then explains what to change and how. You can use the same workflow in other large or long-lived codebases.
 
-This repository and its documentation are maintained with the same Plan→Code workflow.
+We use the same Plan→Code workflow to maintain Associate Cat and its documentation.
 
 ## Quick Start
 
@@ -35,7 +47,7 @@ Install both skills with:
 npx skills add fengzizz/associate-cat
 ```
 
-When prompted, select both `cat-plan` and `cat-code`. Mention the skill by name whenever you want a specific workflow.
+When prompted, select `cat-plan` and `cat-code`. To use a skill, include its name in your request.
 
 For a global, non-interactive install, run the command for your agent:
 
@@ -73,10 +85,10 @@ npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a gi
 
 | Skill | Use it when | What it does |
 | --- | --- | --- |
-| [`cat-plan`](skills/cat-plan/SKILL.md) | You want to explore a requirement, investigate a bug, discuss a design, or review existing work. | Reads the project, clarifies the problem, works through the options, and produces findings or a plan you can keep refining. |
-| [`cat-code`](skills/cat-code/SKILL.md) | A small change is already clear, or an agreed plan is ready to implement. | Implements the agreed scope, runs the relevant checks, and reports what changed and what was verified. |
+| [`cat-plan`](skills/cat-plan/SKILL.md) | You want to explore a requirement, investigate a bug, discuss a design, or review work. | Reads the relevant code and documentation, compares approaches, and gives you findings or a plan. |
+| [`cat-code`](skills/cat-code/SKILL.md) | You have a clear change in mind or a plan ready to implement. | Makes the agreed changes, runs checks, and reports the results. |
 
-`cat-plan` is the heart of the workflow. You bring the goal and the ideas; it investigates the project, works through the technical details, and writes up a plan you can review. Stop there when you only need analysis, add `cat-code` when the work is ready to implement, or go straight to `cat-code` for a small, clear change.
+You can use `cat-plan` on its own; `cat-code` is optional. Small changes can go straight to implementation without a plan. Cat Code waits for your explicit request before changing code. Saving a plan does not give it permission to start.
 
 ## Choose a Workflow
 
@@ -89,7 +101,7 @@ npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a gi
 2. **Plan→Code** — For work you want to think through before implementation.
 
    ```text
-   I have a request for you. Take a look with cat-plan and write up a plan and save it: ...
+   Can you take a look at this with cat-plan? Write up a plan and save it to a file: ...
    ```
 
    You can add a quick note about scope if needed:
@@ -101,7 +113,7 @@ npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a gi
    After you read the plan, just tell it what to change:
 
    ```text
-   ... For this part, use the existing ... No need to create a new module. Update the plan around that.
+   ... For this part, use the existing ... No need to create a new module. Update the plan to match.
    ```
 
    When the plan looks good:
@@ -116,7 +128,7 @@ npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a gi
    Use cat-code to change ... and run ... when you're done.
    ```
 
-You do not need a complete specification to begin. Talk to the AI as you would to a teammate and start with what you know. As you add details or change your mind, `cat-plan` keeps investigating and updates the same plan. When it looks right, hand it to `cat-code`.
+Cat Code handles the implementation details within the agreed scope. It pauses and explains if it needs to change the agreed behavior or design, expand the scope, or ask you to accept a risk. When it finishes, it tells you which checks it ran and what remains unverified.
 
 ## License
 
