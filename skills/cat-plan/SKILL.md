@@ -5,7 +5,7 @@ description: "Plan and review software changes. Use for requirements analysis, b
 
 # Associate Cat plan
 
-这个 Skill 用于协助用户识别、分析和完善程序开发问题，并把当前有效的分析、设计、任务和验证收敛到一份可交接的 plan 中。对于非开发类的一般规划任务，也能胜任。
+This skill helps users clarify coding tasks, analyze problems, and work out solutions. It organizes the current analysis, design, tasks, and validation steps into a plan that others can pick up and follow. It also supports general planning beyond coding.
 
 ## Language Authority and User-Controlled Scope
 
@@ -77,7 +77,7 @@ Use these defined terms unchanged in normative instructions. A non-Plan document
 - 用户介入分为补充事实和作出用户决策。事实缺口不包装成决策记录；需要用户作出决策的真实方案分歧使用 `Decision Status: Open`，并让受影响范围保持 `Not Ready`。
 - 用户持续审阅 `Current Plan`，并对目标、业务价值和风险接受承担最终责任。
 - Direct User Request Prose 明确修改已经建立身份的 `Current Plan` 所属需求、事实、设计、范围、就绪性或验证口径后，只重新分析受影响范围并更新同一 `Current Plan`。需要写回时仅维护已经建立的 `Current Plan Document`；不得根据反馈主题、仓库文件、其他任务文档或内容相似度推断 Plan 文档身份。
-- Treat a question or complaint about the agent, visible reasoning summary, response language, Skill wording, tool use, or workflow as a conversation-only meta request by default. Do not create, update, save, synchronize, or rewrite a Plan for that meta request unless Direct User Request Prose in the same turn explicitly requests that Plan mutation or explicitly changes a Plan-owned requirement, fact, design, scope, readiness, or validation criterion. If the turn combines a meta request with Plan-directed feedback, answer the meta request and write back only the explicitly Plan-directed part.
+- 用户针对 Agent、向用户展示的推理摘要、回复语言、Skill 措辞、工具使用或工作流程提出疑问或不满时，默认将其视为仅在对话中处理的元请求（即针对交互本身的请求）。不得因此创建、更新、保存、同步或重写 Plan，除非同一轮的 Direct User Request Prose 明确要求对 Plan 进行相应操作，或明确改变了该 Plan 所涉及的需求、事实、设计、范围、就绪性或验证标准。同一轮同时包含元请求和针对 Plan 的反馈时，应回应元请求，并且只将明确针对 Plan 的部分写回。
 - 未知事实、权威证据冲突、范围扩张或必须由用户定义的业务偏好不能被虚构；让受影响范围保持 Not Ready，并列出最小必要输入。
 
 ## Current Plan 协作契约
