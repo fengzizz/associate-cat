@@ -12,22 +12,23 @@ Start with a rough idea, a stubborn bug, or a change you're still thinking throu
 
 ## Why Associate Cat
 
-- **Start before you have all the answers.** Describe what you want to build or what's going wrong. `cat-plan` helps you work out the requirements and an approach.
-- **Get a plan that fits your project.** Both skills read the relevant code, project rules, and documentation, including how to check changes.
-- **Keep the investigation focused.** `cat-plan` follows the code and dependencies that matter to the problem, without scanning unrelated parts of the repository.
-- **Review the plan before code.** If the AI misunderstands a requirement, puts a feature in the wrong module, or proposes too much work, correct the plan before it writes code.
-- **Choose the workflow you need.** Stop after analysis, send a small change straight to `cat-code`, or plan a complex task before implementing it.
-- **Hand over what you've agreed on.** The design, scope, tasks, and checks stay in one document that `cat-code` can follow when making and verifying changes.
+- **Start before you know the solution.** Describe your goal or the problem you've run into. Cat Plan investigates the project and helps you work through the requirements and possible approaches.
+- **Review, revise, and pick up where you left off.** Check whether the AI understood your request and whether the design makes sense, then give feedback on specific parts. The current plan keeps the analysis and design together so you can continue the discussion later.
+- **Hand the agreed work to Cat Code.** The plan records the design, scope, tasks, and checks. When you explicitly ask for implementation, Cat Code follows those agreements, makes the changes, and reports what it checked.
 
-## What Makes Cat Plan Different
+## Design Principles
 
-- **Review the results at every stage.** The plan records the AI's understanding of your request, the scope it has set, and the related parts of the project it examined. It then presents a proposed design and breaks the work into tasks. You can review each result and ask for corrections before implementation if the AI misunderstood something or took the design in the wrong direction.
-- **Think through the requirements together.** Reading a plan may reveal a missing constraint or give you a new idea. Tell Cat Plan what to revise. You can return to the same document when you pick up the discussion later.
-- **Let the project answer routine questions.** Cat Plan investigates the information available in the project and handles routine technical decisions. It comes to you for business trade-offs, personal preferences, and significant risks.
+**Give analysis a structure and judgment a foundation.** When a problem first comes up, its requirements, constraints, and solution may still be unclear. Cat Plan investigates relevant facts, defines the scope, and develops a design you can examine piece by piece. A concrete proposal may reveal a missing constraint or prompt you to rethink the original idea. Each stage gives you something to reason about, helping the plan take shape through discussion.
+
+**Build a shared understanding through a consistent format.** Formal plans use an agreed structure for requirements, scope, analysis, design, tasks, and validation. The AI has clear expectations for what to deliver; you know where to find the evidence, examine the design, and give feedback. The structure also makes relationships easier to check: does the design address the requirements, and do the tasks implement the design? You and the AI can revise specific parts and build on them without having to navigate a different format each time.
+
+**Let human judgment shape the work as it develops.** Cat puts the AI in charge of investigation and technical analysis, so you can focus on whether the goal and design fit your needs and which trade-offs you are willing to accept. Feedback should carry through to the affected design and tasks, while findings that still hold remain available. When you explicitly request implementation, Cat Code continues from those agreements. As the problem and its solution take shape, you can make judgments about concrete results and have those judgments guide what happens next.
+
+Match the depth of the process to the task. Simple questions can stay brief; relationships that affect the solution deserve careful analysis.
 
 Cat Plan grew out of the author's day-to-day work on a project. After using and refining it over time, the author adapted it for other projects.
 
-**A practical tip:** If a task needs several discussions or sessions, ask the AI to save the plan as a Markdown file and keep it up to date. You can read it, suggest changes, and hand it to Cat Code when you're ready to implement it.
+**A practical tip:** For work that spans several conversations, ask the AI to save the plan as Markdown and keep it up to date.
 
 ## Where Associate Cat Helps
 
@@ -35,18 +36,11 @@ Cat Plan grew out of the author's day-to-day work on a project. After using and 
 - **Bug investigation, refactoring, code review, or design review.** Ask `cat-plan` to examine the relevant code and dependencies. It can give you findings or turn them into a plan for changes.
 - **Changes you're ready to make.** Ask `cat-code` to handle a small, clear change directly or implement a plan you've already reviewed.
 
-A UE5 game project is one example. It may have a large codebase, complex state, and systems that depend on one another. Cat Plan examines the code and project rules relevant to a feature or bug, then explains what to change and how. You can use the same workflow in other large or long-lived codebases.
+Start with a bug in one part of your project, a feature change, or a piece of writing that needs a clearer structure.
+
+The author also uses this workflow for game development with UE5. Working in a codebase as large and complex as UE5 makes planning ahead especially valuable: Cat Plan proactively examines the relevant code and dependencies, defines the scope of the changes, and establishes how to verify them. Cat Code then implements the plan. This is what the harness provides: a process for building the context the AI needs before it starts making changes and keeping the work within clear boundaries, helping reduce overlooked dependencies and scope creep.
 
 We use the same Plan→Code workflow to maintain Associate Cat and its documentation.
-
-## Real-world examples
-
-Two plans generated from real Codex conversations show what the workflow produces in practice:
-
-- [Reviewing intended behavior in Anim Retarget Magic](examples/plans/plan_fikrig_magic_thik_goal_solver_review.md) follows one solver through configuration, transform logic, curve input, pose output, editor tooling, and legacy conversion. It honors the user's instruction to disregard defects and ends with four ready validation tasks.
-- [Investigating a UE 5.8 sphere-sweep contact offset](examples/plans/plan_ue58_sphere_sweep_contact_offset.md) traces a reported `ImpactPoint` error into Chaos, verifies the error with an independent calculation, and stops at `Partially Ready` because the real caller and asset are still unknown.
-
-See the [examples guide](examples/plans/README.md) for the original requests, results, and validation limits.
 
 ## Quick Start
 
@@ -138,6 +132,15 @@ You can use `cat-plan` on its own; `cat-code` is optional. Small changes can go 
    ```
 
 Cat Code handles the implementation details within the agreed scope. It pauses and explains if it needs to change the agreed behavior or design, expand the scope, or ask you to accept a risk. When it finishes, it tells you which checks it ran and what remains unverified.
+
+## Real-world examples
+
+Two plans generated from real Codex conversations show what the workflow produces in practice:
+
+- [Reviewing intended behavior in Anim Retarget Magic](examples/plans/plan_fikrig_magic_thik_goal_solver_review.md) follows one solver through configuration, transform logic, curve input, pose output, editor tooling, and legacy conversion. It honors the user's instruction to disregard defects and ends with four ready validation tasks.
+- [Investigating a UE 5.8 sphere-sweep contact offset](examples/plans/plan_ue58_sphere_sweep_contact_offset.md) traces a reported `ImpactPoint` error into Chaos, verifies the error with an independent calculation, and stops at `Partially Ready` because the real caller and asset are still unknown.
+
+See the [examples guide](examples/plans/README.md) for the original requests, results, and validation limits.
 
 ## License
 
