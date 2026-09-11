@@ -88,8 +88,8 @@ npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a gi
 
 | Skill | 什么时候用 | 会做什么 |
 | --- | --- | --- |
-| [`cat-plan`](skills/cat-plan/SKILL.md) | 需要分析需求、调查 Bug、讨论设计，或者进行评审时。 | 阅读相关的代码和资料，比较不同的做法，再给出分析结论或修改方案。 |
-| [`cat-code`](skills/cat-code/SKILL.md) | 修改要求已经说清楚，或者已经有了一份可以实施的方案时。 | 在约定的范围内修改代码，完成相关的检查，并说明检查结果。 |
+| [`cat‑plan`](skills/cat-plan/SKILL.md) | 需要分析需求、调查 Bug、讨论设计，或者进行评审时。 | 阅读相关的代码和资料，比较不同的做法，再给出分析结论或修改方案。 |
+| [`cat‑code`](skills/cat-code/SKILL.md) | 修改要求已经说清楚，或者已经有了一份可以实施的方案时。 | 在约定的范围内修改代码，完成相关的检查，并说明检查结果。 |
 
 你可以单独使用 `cat-plan`，有需要时再搭配 `cat-code`。对于要求明确的小改动，也可以直接让 Cat Code 实施，不必先写一份方案。不过，Cat Code 只有在你明确要求实施之后，才会开始修改代码；把方案保存下来，并不代表你已经同意开始实施。
 
