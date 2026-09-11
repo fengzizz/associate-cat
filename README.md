@@ -88,8 +88,8 @@ npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a gi
 
 | Skill | Use it when | What it does |
 | --- | --- | --- |
-| [`cat-plan`](skills/cat-plan/SKILL.md) | You want to explore a requirement, investigate a bug, discuss a design, or review work. | Reads the relevant code and documentation, compares approaches, and gives you findings or a plan. |
-| [`cat-code`](skills/cat-code/SKILL.md) | You have a clear change in mind or a plan ready to implement. | Makes the agreed changes, runs checks, and reports the results. |
+| [`cat‑plan`](skills/cat-plan/SKILL.md) | You want to explore a requirement, investigate a bug, discuss a design, or review work. | Reads the relevant code and documentation, compares approaches, and gives you findings or a plan. |
+| [`cat‑code`](skills/cat-code/SKILL.md) | You have a clear change in mind or a plan ready to implement. | Makes the agreed changes, runs checks, and reports the results. |
 
 You can use `cat-plan` on its own; `cat-code` is optional. Small changes can go straight to implementation without a plan. Cat Code waits for your explicit request before changing code. Saving a plan does not give it permission to start.
 
