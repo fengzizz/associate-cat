@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This reference governs language selection and language-invariant behavior for Cat Code pre-flight, progress, blocker, mapping, validation, and delivery output. It does not grant implementation authorization, expand the Authorized Change Scope, change a Task gate, or alter a validation conclusion.
+This reference governs language selection and language-invariant behavior for Cat Code pre-flight, progress, blocker, mapping, validation, and delivery output. It does not grant implementation authorization, expand the Authorized Change Scope, change implementation conditions, or alter a validation conclusion.
 
 ## When This Reference Is Loaded
 
@@ -12,7 +12,7 @@ This reference does not load or require `output-language-terminology.md`. SKILL.
 
 ## Output Surface Language Resolution
 
-Use the `Interaction Language` already resolved by `SKILL.md`; do not infer it again from the full prompt, source artifacts, or other context. Then resolve one `Output Artifact Language` for each Plan or document that will actually be written. An input Plan language is `Source Artifact Language`: it is input metadata and never overrides `Interaction Language`; it becomes an output artifact language only when Direct User Request Prose explicitly requests that the Plan be maintained or translated in this turn.
+Use the `Interaction Language` already resolved by `SKILL.md`; do not infer it again from the full prompt, source artifacts, or other context. Then resolve one `Output Artifact Language` for each Plan or document that will actually be written. An input Plan language is `Source Artifact Language`: it is input metadata and never overrides `Interaction Language`; it becomes an output artifact language only when Direct User Request Prose authorizes that Plan maintenance or translation for the active task.
 
 Scope a language directive to the named surface. A reply, explanation, progress, or conversation directive affects only `Interaction Language`; a Plan, document, report, or translation directive affects only the named artifact. An unscoped `use X` or `output in X` directive affects `Interaction Language` and every new artifact in the request, but does not translate an existing maintained artifact unless the user explicitly requests that change.
 
@@ -28,7 +28,7 @@ A source-only Plan is input context, not an output artifact. Preserve the main l
 
 Keep `Current Plan` and `Current Plan Document` unchanged in every language. They are defined protocol terms, not localizable prose phrases.
 
-Keep `Document Status`, `Design Readiness`, `Decision Status`, `Task Readiness`, `In Scope`, and `Out of Scope`; the enum values `Draft`, `Final Snapshot`, `Ready`, `Partially Ready`, `Not Ready`, `Open`, `Decided`, `AI`, and `User`; the mechanism words `Target`, `Task`, `Decision`, `change point`, `symbol`, and `Validation`; and ASCII IDs such as `Decision-001`, `TASK-001`, and `VAL-...` unchanged in every language. `Ready` never means implementation authorization. Code writes still require the user's current explicit implementation request and a closed Authorized Change Scope. `Completed` and `Verified` remain distinct. Failed, Not Verified, or Blocked semantics never become success or full closure through translation. The localizable label for the decision owner is `决策责任方` in zh-CN and `Decision Owner` in en; only its values `AI / User` are fixed.
+Keep `Document Status`, `Design Readiness`, `Decision Status`, `Task Readiness`, `In Scope`, and `Out of Scope`; the enum values `Draft`, `Final Snapshot`, `Ready`, `Partially Ready`, `Not Ready`, `Open`, `Decided`, `AI`, and `User`; the mechanism words `Target`, `Task`, `Decision`, `change point`, `symbol`, and `Validation`; and ASCII IDs such as `Decision-001`, `TASK-001`, and `VAL-...` unchanged in every language. `Ready` never means implementation authorization. Implementation authorization, its continuity, scope, and stop conditions are governed by SKILL.md; this reference adds no implementation gate. `Completed` and `Verified` remain distinct. Failed, Not Verified, or Blocked semantics never become success or full closure through translation. The localizable label for the decision owner is `决策责任方` in zh-CN and `Decision Owner` in en; only its values `AI / User` are fixed.
 
 ## Normative Chinese Modality
 
@@ -44,4 +44,4 @@ An ordinary same-language response in a language other than zh-CN or en needs no
 
 ## Quality Gates
 
-Preserve the implementation request, Authorized Change Scope, stop conditions, Task ordering, mapping meaning, and validation result across languages. For zh-CN and en, use the exact terminology display value for every controlled heading, label, status, concept, and pattern; never substitute a synonym, abbreviation, alternate capitalization, or stylistic rewrite. Never soften must, only, never, or stop. Use only one language's display set on one output surface. If a required controlled key is missing, stop rendering that structured template instance, but continue reporting actual changes, validation results, failures, blockers, and risks in `Interaction Language`. Do not invent a substitute display value and do not let localization failure suppress implementation facts.
+Preserve the implementation request, Authorized Change Scope, stop conditions, Task ordering, mapping meaning, and validation result across languages. The vocabulary does not require a report, mapping, or template to be produced. For controlled fields actually used in zh-CN and en, use the exact terminology display value for every controlled heading, label, status, concept, and pattern; never substitute a synonym, abbreviation, alternate capitalization, or stylistic rewrite. Never soften must, only, never, or stop. Use only one language's display set on one output surface. If a required controlled key is missing, stop rendering that structured template instance, but continue reporting actual changes, validation results, failures, blockers, and risks in `Interaction Language`. Do not invent a substitute display value and do not let localization failure suppress implementation facts.
