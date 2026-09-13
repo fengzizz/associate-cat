@@ -4,85 +4,93 @@
 
 [简体中文](README.zh-CN.md)
 
-Associate Cat is a lightweight workflow harness for AI coding. It provides two skills for your coding agent: one to help you work out a plan, and another to make and check the changes.
+**Turn requirements and problems into grounded, reviewable plans.**
 
-Start with a rough idea, a stubborn bug, or a change you're still thinking through. Tell the AI what you know, as you would a teammate. You can work out the details together.
+Associate Cat centers on `cat-plan`, a skill for requirements analysis and bug investigation. It brings project facts, design trade-offs, and follow-up work into plan documents you can review and refine. Use it in Codex, Claude Code, and other coding agents; when you want to make changes, the companion `cat-code` skill can handle implementation and checks.
 
-`cat-plan` is the core of the workflow. It reads the relevant code and documentation, weighs the options, and writes a plan for you to review. Check its understanding of the problem and its proposed design, then tell it what you'd like to change. When you're ready, ask `cat-code` to implement the plan and check the results.
-
-## Why Associate Cat
-
-- **Start before you know the solution.** Describe your goal or the problem you've run into. Cat Plan investigates the project and helps you work through the requirements and possible approaches.
-- **Review, revise, and pick up where you left off.** Check whether the AI understood your request and whether the design makes sense, then give feedback on specific parts. The current plan keeps the analysis and design together so you can continue the discussion later.
-- **Hand the agreed work to Cat Code.** The plan records the design, scope, tasks, and checks. When you explicitly ask for implementation, Cat Code follows those agreements, makes the changes, and reports what it checked.
-
-## Design Principles
-
-**Give analysis a structure and judgment a foundation.** When a problem first comes up, its requirements, constraints, and solution may still be unclear. Cat Plan investigates relevant facts, defines the scope, and develops a design you can examine piece by piece. A concrete proposal may reveal a missing constraint or prompt you to rethink the original idea. Each stage gives you something to reason about, helping the plan take shape through discussion.
-
-**Build a shared understanding through a consistent format.** Formal plans use an agreed structure for requirements, scope, analysis, design, tasks, and validation. The AI has clear expectations for what to deliver; you know where to find the evidence, examine the design, and give feedback. The structure also makes relationships easier to check: does the design address the requirements, and do the tasks implement the design? You and the AI can revise specific parts and build on them without having to navigate a different format each time.
-
-**Let human judgment shape the work as it develops.** Cat puts the AI in charge of investigation and technical analysis, so you can focus on whether the goal and design fit your needs and which trade-offs you are willing to accept. Feedback should carry through to the affected design and tasks, while findings that still hold remain available. When you explicitly request implementation, Cat Code continues from those agreements. As the problem and its solution take shape, you can make judgments about concrete results and have those judgments guide what happens next.
-
-Match the depth of the process to the task. Simple questions can stay brief; relationships that affect the solution deserve careful analysis.
-
-Cat Plan grew out of the author's day-to-day work on a project. After using and refining it over time, the author adapted it for other projects.
-
-**A practical tip:** For work that spans several conversations, ask the AI to save the plan as Markdown and keep it up to date.
-
-## Where Associate Cat Helps
-
-- **A feature or change that's still taking shape.** Bring your goal and initial ideas to `cat-plan` and work through possible approaches.
-- **Bug investigation, refactoring, code review, or design review.** Ask `cat-plan` to examine the relevant code and dependencies. It can give you findings or turn them into a plan for changes.
-- **Changes you're ready to make.** Ask `cat-code` to handle a small, clear change directly or implement a plan you've already reviewed.
-
-Start with a bug in one part of your project, a feature change, or a piece of writing that needs a clearer structure.
-
-The author also uses this workflow for game development with UE5. Working in a codebase as large and complex as UE5 makes planning ahead especially valuable: Cat Plan proactively examines the relevant code and dependencies, defines the scope of the changes, and establishes how to verify them. Cat Code then implements the plan. This is what the harness provides: a process for building the context the AI needs before it starts making changes and keeping the work within clear boundaries, helping reduce overlooked dependencies and scope creep.
-
-We use the same Plan→Code workflow to maintain Associate Cat and its documentation.
+**Structure the investigation and deliverables. Let the model work out the solution.**
 
 ## Quick Start
-
-Install both skills with:
 
 ```bash
 npx skills add fengzizz/associate-cat
 ```
 
-When prompted, select `cat-plan` and `cat-code`. To use a skill, include its name in your request.
+When prompted, select `cat-plan`; add `cat-code` if you want the implementation companion. Generate and save a plan directly:
 
-For a global, non-interactive install, run the command for your agent:
-
-For **Codex**:
-
-```bash
-npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a codex -y
+```text
+Use cat-plan to analyze the following requirements and generate and save a complete implementation plan: ...
 ```
 
-For **Claude Code**:
-
-```bash
-npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a claude-code -y
+```text
+Use cat-plan to investigate the following bug and generate and save a complete bug-fix plan: ...
 ```
 
-For **Cursor**:
+You do not need fully worked-out requirements to begin. Let Cat Plan investigate and deliver a complete initial plan, then review its interpretation, evidence, and design. Keep refining the same document through feedback until the plan is ready to implement. Unresolved conditions belong in the plan too, so you can spot and correct problems early.
 
-```bash
-npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a cursor -y
-```
+See the [real examples](#real-world-examples) for the output, or [agent-specific installation](#agent-specific-installation) for global install commands.
 
-For **Gemini CLI**:
+## Start with Requirements Analysis and Bug Investigation
 
-```bash
-npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a gemini-cli -y
-```
+A capable model still needs to establish your goals, the current state of your project, its key constraints, and what would count as solving the problem. Cat Plan makes that investigation and its conclusions part of the deliverable.
 
-For **GitHub Copilot**:
+| What you want to do | What Cat Plan examines | What you can get |
+| --- | --- | --- |
+| Requirements analysis and feature planning, behavior changes, or refactoring | Goals, current behavior, constraints, reusable approaches, and design trade-offs | A requirements interpretation, design, scope, and validation approach |
+| Investigate a bug and identify a repair direction | Reproduction conditions, actual versus expected behavior, relevant paths, and root-cause evidence | Findings, proposed fixes, risks, and checks still needed |
+| Code review or design review | Responsibilities, behavior, dependencies, compatibility, and change impact | Review findings or improvement proposals, with supporting evidence |
 
-```bash
-npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a github-copilot -y
-```
+Cat Plan also supports requirements beyond coding, such as document improvements, process changes, and general planning. Clarifying goals, investigating facts, comparing approaches, and revising a plan through feedback carry over; the materials examined and the deliverables adapt to the task.
+
+## How It Works
+
+**Let the AI investigate and draft the plan.** Starting from a local problem, Cat Plan examines the project facts and relationships that determine the solution and produces a complete initial plan with a clear scope. You do not need to supply the technical answer or assemble a map of the entire project first.
+
+**Participate by reviewing a concrete proposal.** The document brings requirements, evidence, assumptions, design, and follow-up work together, making misunderstandings and unsuitable trade-offs easier to identify early.
+
+**Keep the discussion in one evolving document.** Feedback updates the affected design, tasks, and verification while preserving conclusions that still hold. The plan takes shape through successive reviews and revisions.
+
+Cat grew out of the author's work on specific requirements and bugs in large projects. It generalizes the skills used in that work while retaining the same approach: start with a local problem, investigate the necessary relationships, define a bounded plan, and refine it through review. Associate Cat itself is maintained with this workflow.
+
+## Real-world Examples
+
+These two cases show Cat Plan outputs from bug investigation and review: how findings gain supporting evidence, and how a plan distinguishes actionable work from work that needs more information.
+
+- **[Code review: narrowing the repair scope from three fixes to one](examples/plans/plan_easy_debug_component_remediation.md).** Rechecking actual callers and engine lifecycle guarantees removed two unsupported repairs and retained one HUD event-routing fix. The result is a smaller, justified implementation plan; compilation and runtime validation were not performed.
+- **[Debugging: tracing a UE 5.8 sphere-sweep contact offset](examples/plans/plan_ue58_sphere_sweep_contact_offset.md).** The investigation follows an `ImpactPoint` error into Chaos and independently checks the coordinate-space calculation. The plan remains `Partially Ready` because the actual caller and asset are missing, so project integration cannot yet be chosen.
+
+The [examples guide](examples/plans/README.md) includes the background, results, and validation limits of all three published plans, including an intended-behavior review of an animation solver.
+
+## Harness Engineering: Defining Problem and Change Boundaries in Large Codebases
+
+Progress in Agentic Coding makes how we organize an AI's work as important a consideration as model capability. Harness Engineering concerns how goals, context, feedback, and verification support continued progress. Cat applies workflow constraints to planning: the AI investigates and proposes solutions, giving you a complete artifact to review, challenge, and refine early.
+
+**Requirements clarification → Preliminary analysis → Design approach → Decisions → Plan**
+
+**Follow a local problem to the relationships that matter.** In large codebases, a bug or requirement often involves responsibilities and dependencies beyond the initial touchpoint. Cat Plan establishes the goal, then uses dependency analysis to build the project context needed for a solution (Context Engineering). Investigation may span several modules while the resulting change stays local. Scope control follows from analysis and design, rather than the first file named in a request.
+
+**Turn engineering constraints into a concrete plan.** The design explains where changes belong, what can be reused, and which existing contracts must hold. Decisions establish the chosen approach and what falls outside this task. The complete plan identifies changes, tasks, and verification, letting you check for excessive scope or overlooked effects. This form of Spec-driven Development can begin with an initial requirement; you do not have to write the technical answer first.
+
+**Let feedback reshape the next version.** The first plan is the starting point for discussion. You can challenge its interpretation, evidence, or design decisions; Cat Plan revises the affected parts and updates downstream tasks and checks. Human-in-the-loop judgment has a concrete place in this process. The same Living Plan records the current solution throughout iterative planning, ready for Cat Code to continue within an agreed scope when you request implementation.
+
+## Start with Cat Plan, Add Implementation When Needed
+
+| Skill | Use it when | What it does |
+| --- | --- | --- |
+| [`cat‑plan`](skills/cat-plan/SKILL.md) | You want to explore a requirement, investigate a bug, discuss a design, or review work. | The core planning skill: investigates relevant facts and develops and maintains reviewable plan documents. |
+| [`cat‑code`](skills/cat-code/SKILL.md) | You have a clear change in mind or a plan ready to implement. | The implementation companion: makes scoped changes and runs checks; also handles clear, small changes independently. |
+
+You can use `cat-plan` on its own; `cat-code` is optional. Small changes can go straight to implementation without a plan. Cat Code waits for your explicit request before changing code. Saving a plan does not give it permission to start.
+
+## Keep Working from the Same Plan
+
+1. **Generate and save an initial plan.** Use a requirement or bug prompt to have Cat Plan investigate and deliver a complete proposal for review.
+2. **Review and revise the same document.** Check the interpretation and scope first, then the design, tasks, and verification. For example: `Prefer reusing the existing module here. Update this plan.`
+3. **Implement when the plan is suitable.** `Use cat-code to implement this plan.`
+
+To continue in a new conversation, have it read and update the same plan. Feedback should change the affected content, rather than simply being appended at the end.
+
+You can also plan and revise without implementing, or use Cat Plan for standalone analysis and review. Clear, small changes can go directly to Cat Code. It reports its changes and checks, and explains when it needs to change the agreed design or scope.
 
 ## Choose a Skill
 
@@ -133,14 +141,47 @@ You can use `cat-plan` on its own; `cat-code` is optional. Small changes can go 
 
 Cat Code handles the implementation details within the agreed scope. It pauses and explains if it needs to change the agreed behavior or design, expand the scope, or ask you to accept a risk. When it finishes, it tells you which checks it ran and what remains unverified.
 
-## Real-world examples
+## Agent-specific Installation
 
-Two plans generated from real Codex conversations show what the workflow produces in practice:
+These commands install both skills globally without interactive prompts. Run the command for your agent:
 
-- [Reviewing intended behavior in Anim Retarget Magic](examples/plans/plan_fikrig_magic_thik_goal_solver_review.md) follows one solver through configuration, transform logic, curve input, pose output, editor tooling, and legacy conversion. It honors the user's instruction to disregard defects and ends with four ready validation tasks.
-- [Investigating a UE 5.8 sphere-sweep contact offset](examples/plans/plan_ue58_sphere_sweep_contact_offset.md) traces a reported `ImpactPoint` error into Chaos, verifies the error with an independent calculation, and stops at `Partially Ready` because the real caller and asset are still unknown.
+For **Codex**:
 
-See the [examples guide](examples/plans/README.md) for the original requests, results, and validation limits.
+```bash
+npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a codex -y
+```
+
+For **Claude Code**:
+
+```bash
+npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a claude-code -y
+```
+
+For **Cursor**:
+
+```bash
+npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a cursor -y
+```
+
+For **Gemini CLI**:
+
+```bash
+npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a gemini-cli -y
+```
+
+For **GitHub Copilot**:
+
+```bash
+npx skills add fengzizz/associate-cat --skill cat-plan --skill cat-code -g -a github-copilot -y
+```
+
+## Other Information
+
+Cat provides skills, not an agent runtime, automatic cross-session memory, or a guarantee of unattended delivery. An initial plan can include unresolved conditions; gaps that determine the solution still need clarification. Results depend on the model, available tools, and project information. 
+
+`This README was primarily generated by Cat AI and may contain inaccuracies or omissions.`
+
+Bring questions and feedback to [Discussions](https://github.com/fengzizz/associate-cat/discussions).
 
 ## License
 
