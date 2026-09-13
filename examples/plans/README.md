@@ -1,8 +1,18 @@
 # Real-world Cat Plan examples
 
-These plans were produced from real Codex conversations about an Unreal Engine project. They are lightly edited for public reading: private links and machine-specific paths have been normalized, while the original scope, technical conclusions, readiness, and validation limits remain intact.
+These plans come from work on an Unreal Engine project. They are lightly edited for public reading: private links and machine-specific paths have been normalized, while the original scope, technical conclusions, readiness, and validation limits remain intact.
 
-The examples intentionally show two different outcomes. A useful plan can finish with all scoped tasks ready, or it can remain `Partially Ready` when the evidence is sufficient to diagnose a defect but insufficient to choose a safe project integration.
+The examples show three useful outcomes: narrowing an overbroad repair scope, documenting intended behavior within an explicit review boundary, and diagnosing a defect while leaving project integration `Partially Ready` until missing evidence is available.
+
+## Code-review reassessment: three proposed repairs become one
+
+- **Background:** An earlier EasyDebugComponent review proposed three repair tasks. The reassessment checks whether those findings are supported by normal callers and engine lifecycle guarantees.
+- **Target:** EasyDebugString's component, subsystem callers, context processing, and UE 5.8 HUD/actor lifecycle.
+- **Output:** One retained P2 HUD event-routing repair, with two unsupported lifecycle repairs excluded from the implementation scope.
+- **Status:** `Final Snapshot / Ready`. This is a planning result; no runtime reproduction was supplied, and compilation and runtime validation were not performed. The report records the UE 5.8 project / UE 5.7 build-script mismatch.
+- **Demonstrates:** Checking reachability and impact before accepting review findings, revising severity, and limiting implementation and validation to the supported repair. It does not establish that excluded scenarios are impossible under arbitrary custom callers.
+
+[Read the complete EasyDebugComponent remediation plan](plan_easy_debug_component_remediation.md)
 
 ## Intended-behavior review for a published UE plugin
 
@@ -26,4 +36,4 @@ The examples intentionally show two different outcomes. A useful plan can finish
 
 ## What has been edited
 
-Each full Plan quotes its original user request verbatim. Private source links are shown as path names so readers can understand the analysis boundary without receiving broken links. The sphere-sweep example replaces a short Unreal Engine source excerpt with equivalent pseudocode. No runtime result or validation status has been upgraded for presentation.
+The solver and sphere-sweep plans quote their original user requests verbatim. The remediation plan adds self-contained background; its original request was not supplied and has not been reconstructed. Private source links are shown as path names so readers can understand the analysis boundary without receiving broken links. The sphere-sweep example replaces a short Unreal Engine source excerpt with equivalent pseudocode. No runtime result or validation status has been upgraded for presentation.
