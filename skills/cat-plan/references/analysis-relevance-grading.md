@@ -18,13 +18,32 @@
 - Avoid turning the final plan into a reading log, source walkthrough, or background article.
 
 ## Discover Code Scope Before Grading
+
+### Establish Initial Scope
+
 - Start from task-relevant code touchpoints. Perform one bounded upward pass to the smallest cohesive code unit that owns or coordinates the state, lifecycle, control flow, or extension points relevant to those touchpoints.
 - Include that code unit in the analysis candidate set if the planned change modifies code within it or if its behavior can constrain the implementation boundary. Treat multiple touchpoints converging on it, or a change spanning multiple of its responsibilities, as strong escalation signals.
 - Treat ownership as a code responsibility, not as inheritance, call-stack position, or directory nesting.
 - For a bounded code unit, inspect its declarations, state ownership, lifecycle entry and exit points, extension points, and direct collaborators only as far as they constrain the plan. Do not expand every helper or branch.
+
+### Follow Implementation Clues
+
+After the initial inspection, notice visible organizational patterns in the task-relevant material, such as:
+
+- Groups of names, similar signatures, or recurring implementation shapes.
+- Multiple entries converging on shared operations, centralized forwarding, or call orchestration.
+- Multiple implementations of an interface, or concentrated registration, selection, and object composition.
+
+Use these cues as entry points for deeper architectural analysis. Examine the related implementations as a whole to uncover the abstractions, responsibility boundaries, and collaboration mechanisms behind their visible structure. Ground the interpretation in the implementation, explaining how that organization supports the feature and shapes reuse, extension, or modification in the current task.
+
+Where the cues reflect ordinary reuse, necessary differences, redundancy, or incidental similarity, describe their significance at that level.
+
 - When the task spans multiple responsibilities in the same code unit, inspect their shared state, execution ordering, common entry or exit points, cleanup, and externally visible effects.
 - Follow direct code dependencies only to answer a concrete question that can change scope, reuse, risk, or validation. Stop when the question is answered or further inspection cannot change the plan.
-- Assign relevance levels only after defining the analysis candidate set and its initial boundary.
+
+### Assign Relevance Levels
+
+Assign relevance levels after defining the candidate set and its initial boundary, incorporating any focus changes from the bounded follow-up. Continue normally when no additional lead emerges.
 
 ## Output Compression Rule
 - Keep only facts that directly affect implementation shape, reuse boundaries, risk judgment, or validation path.
