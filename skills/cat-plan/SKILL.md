@@ -5,7 +5,7 @@ description: "Plan and review software changes. Use for requirements analysis, b
 
 # Associate Cat plan
 
-This skill helps users clarify coding tasks, analyze problems, and work out solutions. It organizes the current analysis, design, tasks, and validation steps into a plan that others can pick up and follow. It also supports general planning beyond coding.
+这个 Skill 用于协助用户识别、分析和完善程序开发问题，并把当前有效的分析、设计、任务和验证收敛到一份可交接的 plan 中。对于非开发类的一般规划任务，也能胜任。
 
 ## Language Authority and User-Controlled Scope
 
@@ -69,6 +69,13 @@ Use these defined terms unchanged in normative instructions. A non-Plan document
 - 仅对实际包含源码实现的改动点，在涉及算法修改、关键接口调整或现有模块关键修改时，补充对应的文件、函数、接口、调用方、兼容策略和必要代码细节；非源码改动点按“改动类型与规则适用范围”处理。
 - 在计划、评审或分析输出中处理文件路径展示文本或 Markdown 链接目标时，读取并遵守 `references/path-link-format.md`，本 Skill 不重复路径格式细节。
 
+## 防止过度防御
+
+- 按完整局部功能流程安排各步骤职责。函数拆分、跨模块或跨语言调用，不代表每一步都成为需要独立防御的入口。
+- 后续步骤沿用前序已建立且仍成立的条件。不要假设调用方会任意跳过步骤、打乱顺序或违反职责，为每一步规划校验与兜底。
+- 对实际允许独立调用的入口，或确实可能使已有条件失效的操作，安排相应处理；保留正常业务分支和已有失败行为。
+- 数据准备或调用顺序有误时，优先规划修正该位置，不把修复拆成各使用点的兜底。细化方案与拆分任务时，保持完整流程的调用关系。
+
 ## 规划循环
 
 - AI 在用户限定任务内连续完成事实调查、需求校正、分析重点判断、方案比较、技术决策、任务拆分和计划评估。
@@ -77,7 +84,7 @@ Use these defined terms unchanged in normative instructions. A non-Plan document
 - 用户介入分为补充事实和作出用户决策。事实缺口不包装成决策记录；需要用户作出决策的真实方案分歧使用 `Decision Status: Open`，并让受影响范围保持 `Not Ready`。
 - 用户持续审阅 `Current Plan`，并对目标、业务价值和风险接受承担最终责任。
 - Direct User Request Prose 明确修改已经建立身份的 `Current Plan` 所属需求、事实、设计、范围、就绪性或验证口径后，只重新分析受影响范围并更新同一 `Current Plan`。需要写回时仅维护已经建立的 `Current Plan Document`；不得根据反馈主题、仓库文件、其他任务文档或内容相似度推断 Plan 文档身份。
-- 用户针对 Agent、向用户展示的推理摘要、回复语言、Skill 措辞、工具使用或工作流程提出疑问或不满时，默认将其视为仅在对话中处理的元请求（即针对交互本身的请求）。不得因此创建、更新、保存、同步或重写 Plan，除非同一轮的 Direct User Request Prose 明确要求对 Plan 进行相应操作，或明确改变了该 Plan 所涉及的需求、事实、设计、范围、就绪性或验证标准。同一轮同时包含元请求和针对 Plan 的反馈时，应回应元请求，并且只将明确针对 Plan 的部分写回。
+- Treat a question or complaint about the agent, visible reasoning summary, response language, Skill wording, tool use, or workflow as a conversation-only meta request by default. Do not create, update, save, synchronize, or rewrite a Plan for that meta request unless Direct User Request Prose in the same turn explicitly requests that Plan mutation or explicitly changes a Plan-owned requirement, fact, design, scope, readiness, or validation criterion. If the turn combines a meta request with Plan-directed feedback, answer the meta request and write back only the explicitly Plan-directed part.
 - 未知事实、权威证据冲突、范围扩张或必须由用户定义的业务偏好不能被虚构；让受影响范围保持 Not Ready，并列出最小必要输入。
 
 ## Current Plan 协作契约
@@ -238,7 +245,7 @@ Use these defined terms unchanged in normative instructions. A non-Plan document
 - 形成局部设计前，先从整体职责、状态流转、共享边界和现有扩展点进行检查，判断问题是否可以通过复用、微调或拓展现有架构或关键流程直接解决，避免一开始就在局部堆叠补丁。
 - 存在改动简单、边界清晰，并且能够从根本上消除一类局部问题的架构或流程方案时，优先采用；只有整体方案收益不足、影响范围过大，或问题确实不涉及整体职责和流程时，才展开局部流程细则。
 - 优先考虑架构不等于必须新增抽象、重构架构或扩大当前任务范围。
-- 当前有效的设计思路要有确定性，并考虑好边界条件和约束条件，做到逻辑自洽；同时避免明显的过度设计（Over Design）和过度兜底。
+- 当前有效的设计思路要有确定性，并考虑好边界条件和约束条件，做到逻辑自洽。
 
 #### 整体设计和局部设计
 
@@ -279,6 +286,8 @@ Use these defined terms unchanged in normative instructions. A non-Plan document
 - 计划包含当前环境不能安全创建、编辑或验证的资源时，写清手动落地步骤、依赖、验收方式及其对 Design Readiness 的影响；不把核心交付依赖伪装成非阻塞补充项。
 
 更多细则参照其他已加载的 references 文档。
+
+
 
 ### 方案评估与建议
 
@@ -340,6 +349,8 @@ Use these defined terms unchanged in normative instructions. A non-Plan document
 - 对于验证类内容，应优先使用项目中已有的验证方法、工具和流程。
 
 ## 质量检查清单
+
+- 按“防止过度防御”检查：是否把局部流程的内部步骤误当成独立入口，为假设的跳步、乱序调用重复安排校验与兜底。
 
 - 输出不空泛，关键点均落到具体系统或模块。
 - 检查 `4.1 设计思路` 是否包含与任务复杂度相称的设计内容，子标题是否使用明确的“……设计”名称，设计是否与当前有效的 Decided 记录和 Target 一致，以及 Open 决策或阻塞性事实缺口是否错误进入 Target 或 Task。
