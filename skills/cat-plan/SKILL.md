@@ -319,6 +319,20 @@ Use these defined terms unchanged in normative instructions. A non-Plan document
 
 ## 其它注意事项
 
+### List and Table Usage Requirements
+
+#### Lists
+
+- Use bulleted lists for distinct, parallel items that need to be identified individually.
+- Use numbered lists for steps that must be followed in order.
+- Do not turn a connected explanation into a list merely because it contains several points.
+
+#### Tables
+
+- Use tables only for items with shared attributes whose values or concise findings need to be looked up or compared across items, such as parameter properties or measurements.
+- Do not use tables for design reasoning, change descriptions, or procedures that require connected explanation.
+- Do not turn file names, objects, or template fields into table rows or columns merely because several are present. An “Item / Description” layout does not justify putting narrative content in a table.
+
 ### 细化专项
 
 - 源码改动点存在关键算法要求时，写明主要步骤、参数、边界条件和失败回退；需要进一步消除实现歧义时，由 AI 自主补充伪代码、调用时序或简图。
