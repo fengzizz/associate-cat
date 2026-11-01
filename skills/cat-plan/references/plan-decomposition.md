@@ -6,7 +6,7 @@
 
 - 适用于程序源码、工具、配置和其他可实施的项目开发任务。
 - 简单问答、只读代码说明和不改变语义的机械操作不要求生成完整 plan，但仍不得越过用户给定范围。
-- 已有按主 `SKILL.md` 建立身份的 `Current Plan` 时，先核对其当前证据、状态和未决项；仓库中存在 Plan、标题或主题相似、文件名匹配，都不能把历史或 source Plan 变成 `Current Plan` 或 `Current Plan Document`，任务涉及的其他文档也不能建立该身份；不要因为文档标题叫“计划”就假定其可以实施或写回。
+- 形成实施方案时，按主 `SKILL.md` 建立的 Current Plan 核对当前证据、状态和未决项；来源文档的采用与 Current Plan Document 的维护按其绑定和用户请求处理。
 
 ## 规划责任
 
@@ -28,7 +28,7 @@
 5. 当前结果闭合后，将 Decided 记录、当前设计、Target、Task 和验证同步为一套一致方案。
 6. 进入 `Ready` 前执行覆盖闭环：把目标和后续新增需求逐项映射到带来源约束、当前设计、Target、Task 和验证。排除项记录为带来源的 `Out of Scope`。
 
-## Current Plan 必须承载的内容
+## 正式计划类型的 Current Plan 内容
 
 正式 plan 至少包含：
 
@@ -52,7 +52,7 @@
 
 ## 对话与本地存盘
 
-- `Current Plan Document` 身份、Plan 文档动作、目标分配和恢复门禁由主 `SKILL.md` 及其直接加载的 `plan-persistence.md` 定义；本 reference 不从文件搜索、标题、主题、内容相似度或其他任务文档建立第二套判断。
+- `Current Plan Document` 身份、文档动作、目标分配和恢复门禁由主 `SKILL.md` 及其直接加载的 `plan-persistence.md` 定义；本 reference 不从文件搜索、标题、主题、内容相似度或其他任务文档建立第二套判断。
 - 当前活动规划任务没有 `Current Plan Document` 时，默认在对话中维护 `Current Plan`；Direct User Request Prose 明确要求 Plan 文档、保存或写入本地 Plan 时，再按主契约处理首次存盘。
 - 用户明确要求维护已经建立身份的 `Current Plan` 时，新的事实、分析、当前设计和反馈仍属于同一逻辑 Plan；需要写回时只更新同一 `Current Plan Document`，不创建平行副本。
 - 被提供、发现或引用的 source / historical Plan 默认保持只读；用户要求根据它生成新 Plan 时，source 文件保持不变。

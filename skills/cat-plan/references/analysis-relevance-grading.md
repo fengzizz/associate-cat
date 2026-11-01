@@ -5,6 +5,10 @@
 - Convert the vague statement "analyze relevant modules first" into explicit output obligations.
 - Use `pre-analysis-writing-guide.md` only after the relevance level is settled, to calibrate wording, compression, and section-writing style.
 
+## Review Applicability
+
+For source-code review, follow the scope-discovery, relevance-grading, minimum-depth, and output-compression rules in this reference. Interpret decision pressure as the effect on review conclusions and their reliability, rather than assuming a planned change. Present the resulting analysis in the review report; implementation-specific fields remain applicable only when change planning is requested. Non-code review follows the shared analysis rules in SKILL.md and the structure of the reviewed object.
+
 ## Core Principle
 - Treat relevance grading as working analysis data, not as the final deliverable by default.
 - Grade by decision pressure, not by file size or code volume alone.

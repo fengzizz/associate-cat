@@ -7,9 +7,10 @@ This reference is the controlled display vocabulary for Cat Plan. Each row has t
 | key | class | source_zh_cn | en | context |
 | --- | --- | --- | --- | --- |
 | `plan.heading.document_title` | pattern | `<任务名> 计划` | `<Task Name> Plan` | Required H1; only the task-name slot is variable. |
-| `plan.heading.requirements` | heading | 需求校正与关键假设 | Requirement Correction and Key Assumptions | Required H2 section 1. |
-| `plan.heading.scope` | heading | 目标与范围 | Goals and Scope | Required H2 section 2. |
-| `plan.heading.analysis` | heading | 前置分析 | Preliminary Analysis | Required H2 section 3. |
+| `plan.heading.requirements` | heading | 需求校正与关键假设 | Requirement Correction and Key Assumptions | Required H2 section 1 of a Plan or complete review report. |
+| `plan.heading.scope` | heading | 目标与范围 | Goals and Scope | Required H2 section 2 of a Plan or complete review report. |
+| `plan.heading.analysis` | heading | 前置分析 | Preliminary Analysis | Required H2 section 3 of a Plan or complete review report. |
+| `plan.heading.external_research` | heading | 外部资料搜集与研究 | External Research | Optional H3 under Preliminary Analysis in a Plan or complete review report when research conclusions need separate explanation. |
 | `plan.heading.benchmark_analysis` | heading | 直接对标分析 | Direct Benchmark Analysis | Optional H3 under Preliminary Analysis. |
 | `plan.heading.implementation` | heading | 实现方案 | Implementation Approach | Required H2 section 4. |
 | `plan.heading.design` | heading | 设计思路 | Design Approach | Required H3 under Implementation Approach. |
@@ -28,13 +29,30 @@ This reference is the controlled display vocabulary for Cat Plan. Each row has t
 | `plan.heading.validation` | heading | 验证与回归检查 | Validation and Regression Checks | Required H2 before the assessment. |
 | `plan.heading.assessment` | heading | 方案评估与建议 | Assessment and Recommendations | Required final H2. |
 
+## Review Headings and Labels
+
+| key | class | source_zh_cn | en | context |
+| --- | --- | --- | --- | --- |
+| `review.heading.document_title` | pattern | `<任务名> 评审报告` | `<Task Name> Review Report` | H1 for a complete review report. |
+| `review.heading.conclusions` | heading | 评审结论 | Review Conclusions | H2 section 4 of a complete review report. |
+| `review.heading.next_steps` | heading | 后续建议 | Suggested Next Steps | H2 section 5 of a complete review report. |
+| `review.heading.verification` | heading | 验证与待核实事项 | Verification and Open Questions | H2 section 6 of a complete review report. |
+| `review.heading.item` | pattern | `Review-001：<评审事项>` | `Review-001: <Review Topic>` | Repeated H3 under Review Conclusions; the prefix and separators are fixed, and the three-digit number is assigned per review item. |
+| `review.summary` | label | 总体结论 | Overall Conclusion | Overall review judgment. |
+| `review.object_location` | label | 对象与位置 | Object and Location | Code or non-code object and its identifiable location. |
+| `review.conclusion` | label | 结论 | Conclusion | The current judgment on the reviewed topic, including what remains undetermined. |
+| `review.evidence` | label | 依据 | Basis | Facts and analysis supporting the judgment. |
+| `review.impact` | label | 影响 | Impact | Practical effect under the stated conditions. |
+| `review.recommendation` | label | 建议 | Recommendation | Optional treatment or improvement ideas within a Review item. |
+| `review.severity` | label | 问题严重程度 | Issue Severity | Applicable to identified problems; expressed separately from evidence sufficiency. |
+
 ## Controlled Core Concepts
 
 | key | class | source_zh_cn | en | context |
 | --- | --- | --- | --- | --- |
-| `plan.concept.current_plan` | concept | Current Plan | Current Plan | The single logical Plan state for one active planning task; fixed protocol, not localized. |
-| `plan.concept.current_plan_document` | concept | Current Plan Document | Current Plan Document | The single persisted Plan document carrying the Current Plan for one active planning task; fixed protocol, not localized. |
-| `plan.concept.authoritative_snapshot` | concept | 当前协作基准版本 | Authoritative Working Snapshot | Collaboration priority without claiming inherent correctness. |
+| `plan.concept.current_plan` | concept | Current Plan | Current Plan | The current working state for one active task; its content and deliverable structure follow the task type. Fixed protocol, not localized. |
+| `plan.concept.current_plan_document` | concept | Current Plan Document | Current Plan Document | The document bound to and carrying the Current Plan for that task, established through requested persistence or designated continued maintenance. Fixed protocol, not localized. |
+| `plan.concept.authoritative_snapshot` | concept | 当前协作基准版本 | Authoritative Working Snapshot | The current baseline for collaboration, revised in response to evidence and user feedback. |
 | `plan.concept.decision_record` | concept | 决策记录 | Decision Record | A record for real design divergence, not missing information. |
 | `plan.concept.decision_owner` | concept | 决策责任方 | Decision Owner | Owner of the decision; values remain AI or User. |
 | `plan.concept.missing_information` | concept | 缺少的关键信息 | Missing Required Information | Undiscoverable required facts, not an Open Decision. |
@@ -42,7 +60,7 @@ This reference is the controlled display vocabulary for Cat Plan. Each row has t
 | `plan.concept.bounded_decision` | concept | 有明确边界的主动决策 | Bounded Active Decision-Making | AI technical decision-making within the user-defined goal. |
 | `plan.concept.requirement_correction` | concept | 需求校正 | Requirement Correction | Correct ambiguity without changing the user's goal. |
 | `plan.concept.scoped_upstream_analysis` | concept | 按需向上追溯 | Scoped Upstream Analysis | Bounded upstream analysis, not repository-wide exploration. |
-| `plan.concept.preliminary_analysis` | concept | 前置分析 | Preliminary Analysis | Fact model used by design, risk, and validation. |
+| `plan.concept.preliminary_analysis` | concept | 前置分析 | Preliminary Analysis | Analysis of the current state and, as needed, external research, informing design, review conclusions, risk, and validation. |
 | `plan.concept.current_design` | concept | 当前采用的设计 | Current Design | The one effective design, not an option set. |
 | `plan.concept.sourced_constraint` | concept | 有明确来源的约束 | Sourced Constraint | A constraint from user, project rules, or discoverable facts. |
 
@@ -50,22 +68,22 @@ This reference is the controlled display vocabulary for Cat Plan. Each row has t
 
 | key | class | source_zh_cn | en | context |
 | --- | --- | --- | --- | --- |
-| `plan.requirements.task_type` | label | 任务类型 | Task Type | Classification of the overall request, not a Task ID. |
-| `plan.requirements.document_output_location` | label | 文档输出位置 | Document Output Location | Chat-only or persisted Plan location, not Document Status. |
-| `plan.requirements.contradictions_and_missing_information` | label | 矛盾和缺少的关键信息 | Contradictions and Missing Information | Current contradictions and unavailable required facts, not Decision options. |
-| `plan.requirements.adopted_interpretation` | label | 采用口径 | Adopted Interpretation | The current requirement interpretation, not an option set. |
-| `plan.requirements.assumptions_and_impacts` | label | 假设及影响 | Assumptions and Impacts | Non-structural assumptions and their consequences. |
-| `plan.requirements.task_description` | label | 任务描述 | Task Description | Corrected overall request description, not one implementation Task. |
-| `plan.scope.goals` | label | 目标 | Goals | Expected outcomes, not Target records. |
-| `plan.scope.notes` | label | 注意事项 | Notes | Necessary usage or execution notes, not substitute constraints. |
-| `plan.analysis.user_scope` | label | 用户指定分析范围 | User-Specified Analysis Scope | Analysis objects explicitly requested by the user. |
-| `plan.analysis.additional_scope` | label | AI 补充的分析范围 | Additional Scope Identified by AI | Minimum additional objects required by scoped upstream analysis. |
-| `plan.analysis.scope_rationale` | label | 范围判断依据 | Scope Rationale | Why the selected analysis scope is closed. |
-| `plan.analysis.depth` | label | 分析深度说明 | Analysis Depth | Required depth by object, not implementation priority. |
-| `plan.analysis.current_facts` | label | 当前事实与约束 | Current Facts and Constraints | Verifiable current facts and direct constraints, not design advice. |
-| `plan.analysis.existing_mechanisms` | label | 现有机制 | Existing Mechanisms | Existing behavior that changes the design. |
-| `plan.analysis.reuse_preserve_avoid` | label | 复用/保留/避免项 | Reuse / Preserve / Avoid | Reuse choices and regression-prevention boundaries. |
-| `plan.analysis.risks_and_limitations` | label | 风险与限制 | Risks and Limitations | Real risks that affect design or validation. |
+| `plan.requirements.task_type` | label | 任务类型 | Task Type | Classification of the overall request, not a Task ID. Also used in complete review reports. |
+| `plan.requirements.document_output_location` | label | 文档输出位置 | Document Output Location | Chat-only or persisted Plan location, not Document Status. Also used in complete review reports. |
+| `plan.requirements.contradictions_and_missing_information` | label | 矛盾和缺少的关键信息 | Contradictions and Missing Information | Current contradictions and unavailable required facts, not Decision options. Also used in complete review reports. |
+| `plan.requirements.adopted_interpretation` | label | 采用口径 | Adopted Interpretation | The current requirement interpretation, not an option set. Also used in complete review reports. |
+| `plan.requirements.assumptions_and_impacts` | label | 假设及影响 | Assumptions and Impacts | Non-structural assumptions and their consequences. Also used in complete review reports. |
+| `plan.requirements.task_description` | label | 任务描述 | Task Description | Corrected overall request description, not one implementation Task. Also used in complete review reports. |
+| `plan.scope.goals` | label | 目标 | Goals | Expected outcomes, not Target records. Also used in complete review reports. |
+| `plan.scope.notes` | label | 注意事项 | Notes | Necessary usage or execution notes, not substitute constraints. Also used in complete review reports. |
+| `plan.analysis.user_scope` | label | 用户指定分析范围 | User-Specified Analysis Scope | Analysis objects explicitly requested by the user. Also used in complete review reports. |
+| `plan.analysis.additional_scope` | label | AI 补充的分析范围 | Additional Scope Identified by AI | Minimum additional objects required by scoped upstream analysis. Also used in complete review reports. |
+| `plan.analysis.scope_rationale` | label | 范围判断依据 | Scope Rationale | Why the selected analysis scope is closed. Also used in complete review reports. |
+| `plan.analysis.depth` | label | 分析深度说明 | Analysis Depth | Required depth by object, not implementation priority. Also used in complete review reports. |
+| `plan.analysis.current_facts` | label | 当前事实与约束 | Current Facts and Constraints | Verifiable current facts and direct constraints, not design advice. Also used in complete review reports. |
+| `plan.analysis.existing_mechanisms` | label | 现有机制 | Existing Mechanisms | Existing behavior that affects the design or review conclusions; also used in review reports. |
+| `plan.analysis.reuse_preserve_avoid` | label | 复用/保留/避免项 | Reuse / Preserve / Avoid | Reuse choices and regression-prevention boundaries. Also used in complete review reports. |
+| `plan.analysis.risks_and_limitations` | label | 风险与限制 | Risks and Limitations | Real risks that affect design, review conclusions, or validation; also used in review reports. |
 | `plan.analysis.bug_diagnosis_and_fix_plan` | label | Bug 定位与修复方案 | Bug Diagnosis and Fix Plan | Conditional Bug analysis and fix-planning block. |
 | `plan.analysis.reproduction` | label | 复现条件/触发概率 | Reproduction Conditions / Trigger Probability | Reproduction entry and frequency. |
 | `plan.analysis.actual_expected` | label | 实际行为 vs 预期行为 | Actual Behavior vs. Expected Behavior | Observable behavioral deviation. |
