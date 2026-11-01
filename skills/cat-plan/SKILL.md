@@ -1,11 +1,11 @@
 ---
 name: cat-plan
-description: "Plan and review software changes. Use for requirements analysis, bug investigation and fix planning, technical or refactor plans, task breakdown, and code or design review; do not use for implementation."
+description: "Plan and review development work and general non-development plans, documents, and workflows. Use for requirements analysis, bug investigation and fix planning, technical or refactor planning, task breakdown, and review; do not use for implementation."
 ---
 
 # Associate Cat plan
 
-这个 Skill 用于协助用户识别、分析和完善程序开发问题，并把当前有效的分析、设计、任务和验证收敛到一份可交接的 plan 中。对于非开发类的一般规划任务，也能胜任。
+Cat Plan helps users identify and analyze software development problems and refine proposed solutions. Depending on the task objectives, it provides analysis and review conclusions supported by evidence, or consolidates the current design, tasks, and validation requirements into a plan ready for handoff. It also supports general planning and review tasks outside software development.
 
 ## Language Authority and User-Controlled Scope
 
@@ -24,29 +24,30 @@ This section changes language inference and user-authorization inference only. I
 
 ## Core Concepts
 
-- **Current Plan**: The single logical Plan state for one active planning task. It may exist only in the conversation, and an existing Plan is adopted only when Direct User Request Prose designates it for continued maintenance.
-- **Current Plan Document**: The single persisted Plan document that carries the Current Plan. It is established by the Current Plan's first persistence or by Direct User Request Prose designating an existing Plan document for continued maintenance.
+- **Current Plan**: The current working state for one active task. Its content and deliverable structure follow the task type, including review, planning, or Bug analysis and fix planning. It may be maintained in the conversation or persisted in a document.
+- **Current Plan Document**: The document bound to and carrying the Current Plan for that task. The binding is established by first persistence requested for the task or by Direct User Request Prose designating an existing deliverable for continued maintenance.
 
-Use these defined terms unchanged in normative instructions. A non-Plan document is never the Current Plan Document, and search results, names, topics, similarity, or historical status establish neither identity.
+Use these defined terms unchanged in normative instructions. A review report or formal Plan may carry the Current Plan according to the task type; document identity follows the binding conditions above.
 
 ## 引用资料加载规则
 
-- 开始正式规划前读取 `references/project-context.md`，发现当前项目规则、知识入口、事实来源和验证入口。
+- 开始正式规划或项目相关评审前读取 `references/project-context.md`，发现当前项目规则、知识入口、事实来源和验证入口。
 - 规划包含源码改动点、Bug 修复、工具或系统开发时，读取 `references/plan-decomposition.md`。
-- 需要确定分析对象范围和深度时读取 `references/analysis-relevance-grading.md`。
-- 需要校准前置分析章节的写法和压缩方式时读取 `references/pre-analysis-writing-guide.md`。
-- 当前范围存在真实方案分歧，或 `Current Plan` 已含 `Decision-...` 时读取 `references/decision-record-rules.md`；没有真实分歧时不加载，也不建立设计决策记录。
+- 源码规划或源码评审需要确定分析对象范围和深度时读取 `references/analysis-relevance-grading.md`。
+- 源码规划或源码评审需要校准前置分析章节的写法和压缩方式时读取 `references/pre-analysis-writing-guide.md`；非源码任务不加载源码专项引用。
+- 评审任务读取 `references/review-guidelines.md`；输出或更新完整评审报告时读取 `references/review-output-template.md`。
+- 形成或维护正式方案的范围存在真实方案分歧，或 `Current Plan` 已含 `Decision-...` 时读取 `references/decision-record-rules.md`；没有真实分歧时不加载，也不建立设计决策记录。评审中的技术比较本身不生成记录。
 - 正式计划需要任务拆分时，通过 `plan-decomposition.md` 读取 `references/task-decomposition-method.md`。
-- 输出或更新正式 plan 时读取 `references/plan-output-template.md` 和 `references/plan-evaluation-criteria.md`。
+- 输出或更新正式 plan 正文时读取 `references/plan-output-template.md`，正文完成后读取 `references/plan-evaluation-criteria.md`。
+- 评审已有计划时，按需要核对的结构、设计决策或可交接性读取计划模板、决策规则或计划评估标准，作为评审依据；读取不意味着生成当前设计、决策记录或 Task。
 - 正式 Plan 的结构由模板负责；非中文受控显示值按本节语言规则由 `SKILL.md` 直接组合，不要求模板继续加载语言 reference。
 - 需要处理文件路径展示和本地链接格式时读取 `references/path-link-format.md`。
-- 创建、保存、更新或在上下文压缩/会话恢复后恢复 Plan 文档身份时，直接读取 `references/plan-persistence.md`。
+- 创建、保存、维护或在上下文压缩／会话恢复后恢复 `Current Plan Document` 绑定时，直接读取 `references/plan-persistence.md`。
 - 按 `Language Authority and User-Controlled Scope` 先解析 `Interaction Language`，再为每个实际新建或写回的 Plan/文档分别解析 `Output Artifact Language`。既有维护对象在用户未明确指定该 artifact 语言时保持其主语言；新建交付物在用户未明确指定时采用 `Interaction Language`。只读输入 Plan/文档的语言只是 `Source Artifact Language`，不得覆盖任何输出语言。
-- 面向用户的提问、说明、阻塞、评审结论和交付摘要使用 `Interaction Language`；正式 Plan 或被维护文档正文使用对应的 `Output Artifact Language`。每个输出表面默认只使用一种自然语言；不同表面使用不同语言不属于双语对照。
+- 面向用户的提问、说明、阻塞、聊天中的评审结论和交付摘要使用 `Interaction Language`；正式 Plan、评审报告或被维护文档正文使用对应的 `Output Artifact Language`。每个输出表面默认只使用一种自然语言；不同表面使用不同语言不属于双语对照。
 - “回复/说明/进度使用 X”只设置 `Interaction Language`；“Plan/文档使用 X”只设置被点名交付物；“翻译这份文档为 X”只切换该文档；未限定对象的“用 X 输出/全程用 X”设置本轮交互和新建交付物，但不自动翻译既有维护对象。
 - 任意语言的普通同语言自然回复，以及只读审阅异语言输入但不生成非中文受控结构的场景，都不读取语言引用。
 - 只有显式语言切换、翻译、双语或术语对照，对话语言与实际输出 artifact 语言不同，语言指令作用域无法唯一解析，或需要生成 zh-CN/en 之外的正式结构化表面时，才直接读取 `references/output-language-policy.md`。
-- 输出或更新正式 Plan 时，直接读取 `references/plan-output-template.md` 与 `references/plan-evaluation-criteria.md`。
 - 只有目标输出表面需要非 zh-CN 的受控 heading、label、status、pattern、正式 concept，或用户要求术语对照时，才直接读取 `references/output-language-terminology.md`；第三语言正式结构化表面固定同时读取 policy 与 terminology。命中后必须使用 terminology 的精确显示值，不得换用同义标题、缩写或近义机制词。
 - 两个语言引用分别按自身条件加载；读取其中一个不触发另一个，也不通过 reference 间接加载 reference。
 - 不一次性加载所有引用。只在当前阶段需要其职责时读取。
@@ -54,13 +55,13 @@ Use these defined terms unchanged in normative instructions. A non-Plan document
 ## 执行约束
 
 - 只做计划、评审、Bug 分析和 `Current Plan` 维护，不修改代码、配置或资源文件；用户明确要求进入实现阶段时，将对应任务交给 `cat-code`。
-- 任务分流：需求开发任务走开发计划主线；Bug 修复任务先定位问题，再给修复计划；纯评审请求以结论和改进建议为主。
+- 任务分流：需求／重构规划、Bug 分析与修复规划、评审是平级事务。需求／重构规划形成当前设计与修改安排；Bug 修复规划先定位原因，再形成修复方案；评审围绕目标和约束形成有依据的判断、发现及适当建议。
 - 先基于用户给定范围收敛任务边界；范围不清时先定义最小可行范围并标注假设。
-- 只覆盖当前需求；只有直接依赖会改变方案范围、复用判断、风险或验证闭环时，才纳入最小必要关联范围，并在 In Scope 中显式说明。
+- 只覆盖当前需求；只有直接依赖会改变方案范围、复用判断、评审结论、风险或验证闭环时，才纳入最小必要关联范围，并在 In Scope 中显式说明。
 - 需求不完善或有矛盾时，只对不会决定架构、行为或语义的非结构性信息建立最小假设，并显式写出假设及其影响。结构和行为等设计决策按当前规划责任与设计决策记录加载条件处理，不从 Skill 调用或默认配置推导用户确认。
-- 默认先按“前置分析”中的共用原则建立与任务直接相关的事实模型，再进入规划；覆盖用户指定范围，并将影响方案的结论并入最终计划。
-- 对源码改动执行范围发现和相关性分级时，读取 `references/analysis-relevance-grading.md`；在共用分析骨架上应用 Coding 的候选范围、正式等级、最低分析深度和输出义务。
-- 对源码改动，若需要校准“前置分析”章节的写法、压缩方式与常见误区，读取 `references/pre-analysis-writing-guide.md`；非源码改动不加载该源码专项写作指南，但仍遵守本 Skill 的共用分析与正文压缩原则。正式非源码 plan 按目标对象自身结构和 `references/plan-output-template.md` 组织；普通非源码分析、解释或独立评审不因此套用正式 plan 模板。
+- 默认先按“前置分析”中的共用原则建立与任务相关的事实模型，按任务形成设计或评审判断；覆盖用户指定范围，并将重要分析结论并入最终交付。
+- 对源码规划或源码评审执行范围发现和相关性分级时，读取 `references/analysis-relevance-grading.md`；在共用分析骨架上应用 Coding 的候选范围、正式等级、最低分析深度和输出义务。
+- 对源码规划或源码评审，若需要校准“前置分析”章节的写法、压缩方式与常见误区，读取 `references/pre-analysis-writing-guide.md`；非源码改动不加载该源码专项写作指南，但仍遵守本 Skill 的共用分析与正文压缩原则。正式非源码 plan 按目标对象自身结构和 `references/plan-output-template.md` 组织；普通非源码分析、解释或独立评审不因此套用正式 plan 模板。
 - 对源码改动点，通过 `references/plan-decomposition.md` 使用唯一的 `task-decomposition-method.md` 生成 Task；非源码改动点使用 `references/plan-output-template.md` 定义的非源码修改卡片，混合计划逐项选择适用卡片。
 - 优先复用现有框架、组件、状态机和网络链路；新增模块前先说明无法复用的原因。
 - 源码和非源码规划都遵守当前项目适用的规则、边界和验证入口；通用 Cat 只负责发现和应用这些约束，不复制项目知识。新增对象、资源、配置或流程前，先检查当前项目是否已有可复用实现。
@@ -78,28 +79,30 @@ Use these defined terms unchanged in normative instructions. A non-Plan document
 
 ## 规划循环
 
+各事务共用调查、自主判断、用户介入和反馈修正原则。形成方案时使用当前设计、设计决策、Task 与计划后置评估；评审中的比较服务于判断和建议，按评审引用完成交付。
+
 - AI 在用户限定任务内连续完成事实调查、需求校正、分析重点判断、方案比较、技术决策、任务拆分和计划评估。
 - 事实充分时，AI 在用户限定目标和范围内直接完成技术方案比较并形成当前设计，不逐项等待用户选择。
 - 只有不可发现事实、用户定义的业务语义或主观偏好、重大风险接受、破坏性兼容取舍或范围扩张会决定结果时，才请求用户介入；先完成可发现事实调查，再提出最小必要问题。
 - 用户介入分为补充事实和作出用户决策。事实缺口不包装成决策记录；需要用户作出决策的真实方案分歧使用 `Decision Status: Open`，并让受影响范围保持 `Not Ready`。
 - 用户持续审阅 `Current Plan`，并对目标、业务价值和风险接受承担最终责任。
-- Direct User Request Prose 明确修改已经建立身份的 `Current Plan` 所属需求、事实、设计、范围、就绪性或验证口径后，只重新分析受影响范围并更新同一 `Current Plan`。需要写回时仅维护已经建立的 `Current Plan Document`；不得根据反馈主题、仓库文件、其他任务文档或内容相似度推断 Plan 文档身份。
-- Treat a question or complaint about the agent, visible reasoning summary, response language, Skill wording, tool use, or workflow as a conversation-only meta request by default. Do not create, update, save, synchronize, or rewrite a Plan for that meta request unless Direct User Request Prose in the same turn explicitly requests that Plan mutation or explicitly changes a Plan-owned requirement, fact, design, scope, readiness, or validation criterion. If the turn combines a meta request with Plan-directed feedback, answer the meta request and write back only the explicitly Plan-directed part.
-- 未知事实、权威证据冲突、范围扩张或必须由用户定义的业务偏好不能被虚构；让受影响范围保持 Not Ready，并列出最小必要输入。
+- Direct User Request Prose 明确修改当前任务的目标、事实、分析、结论、设计、范围或验证口径后，复核受影响范围并更新同一 `Current Plan`。需要存盘时，维护已建立绑定的 `Current Plan Document`；用户要求独立新交付时，按相应事务建立新的状态与文档绑定。
+- Treat questions or complaints about the agent's own behavior, response presentation, or tool use as conversation-only meta requests by default. Do not create, update, save, synchronize, or rewrite the Current Plan Document for that meta request unless Direct User Request Prose in the same turn explicitly requests that document action or explicitly changes a task-owned requirement, fact, analysis, conclusion, design, scope, readiness, or validation criterion. If the turn combines a meta request with task-directed feedback, answer the meta request and write back only the explicitly task-directed part.
+- 未知事实、权威证据冲突、范围扩张或必须由用户定义的业务偏好不能被虚构；方案就绪性判断中让受影响范围保持 Not Ready；评审说明未知事项对结论的影响，并列出最小必要输入。
 
 ## Current Plan 协作契约
 
-- `Current Plan` 是活动规划任务中的权威快照和工作记忆，不是天然正确的事实来源。
-- `Current Plan` 将关键分析、当前设计、必要的设计决策记录、任务、风险和验证保存在同一逻辑状态中，不拆成平行状态文档。
+- `Current Plan` 是当前事务的协作基准和工作记忆，其分析与结论随证据和用户反馈持续复核、修正。
+- `Current Plan` 保存当前事务的有效内容：规划按实际阶段保存分析、设计、适用的决策与任务；评审保存分析、总体评价、Review 事项及判断、建议和验证限制。
 - `Current Plan` 只保留当前有效内容。普通修订过程、旧决策结果、失效方案、聊天脚手架和冗余历史不写入正文。
 - 如需复盘历史，应读取聊天记录、版本历史或旧文件，并重新分析其与当前事实的关系；不能把模型上下文当作完整历史记录。
 - 不确定性仍然真实存在时，记录当前未知项、失效条件和验证方式；不要为了文档干净把未知伪装成确定结论。
 
 ## Plan Persistence
 
-- Maintain one Current Plan Document per active planning task. Reuse the established Current Plan Document for continued work; create a new Plan document only when the Current Plan has no persisted document and persistence is requested, or when the user explicitly requests a new or separate Plan.
-- Never overwrite an existing file to create a new Plan document.
-- Before any Plan-document file action, read `references/plan-persistence.md`. If the Current Plan Document identity is ambiguous, do not write.
+- Maintain one Current Plan Document for each persisted task. Continue an established review or Plan in its bound document; create a document for a new deliverable when persistence is requested.
+- Generating a Plan from a review creates a separate Plan by default and preserves the review. Replacing the review file with a Plan requires the user's explicit request to overwrite that file.
+- Before a Current Plan Document file action or binding recovery, read `references/plan-persistence.md` and resolve the target document.
 
 ## 状态协议
 
@@ -124,10 +127,10 @@ Use these defined terms unchanged in normative instructions. A non-Plan document
 
 ## 正式计划输出
 
-- 以计划为主要交付物的草案、阶段计划、开发计划、修订计划、最终计划和写回 Markdown 的计划都属于正式计划输出；普通问答、单点分析、方案讨论片段和独立评审报告不强制套用计划模板。
+- 以计划为主要交付物的草案、阶段计划、开发计划、修订计划、最终计划和写回 Markdown 的计划都属于正式计划输出；普通问答、单点分析、方案讨论片段和独立评审报告不强制套用计划模板。以独立评审为主要交付目的时，默认按评审报告模板交付，无须用户另行要求格式；明确的单点核实和局部追问按当前目的简短表达。
 - 输出正式计划时读取 `references/plan-output-template.md`；章节骨架、用户特殊要求的落位、设计决策记录和正文格式由该模板负责。
 - 先完成正文，再读取 `references/plan-evaluation-criteria.md` 生成后置“方案评估与建议”；其字段、位置和合格标准不在本 Skill 重复定义。
-- 用户明确要求 Plan 文档或完整 Plan 文档时，默认生成或维护本地 Markdown Plan；用户明确要求只在对话中展示时不存盘。用户只要求生成计划、制定方案、给出计划或等价内容型输出，且没有 Plan 文档、文件、路径、存盘或更新语义时，默认在对话中输出。`Current Plan`、`Current Plan Document`、具体 Plan 文档动作和目标路径按 `Plan Persistence` 及其直接加载的 reference 执行。独立评审报告或其他非 Plan 文档不使用该概念和 reference。
+- 用户明确要求 Plan 文档或完整 Plan 文档时，默认生成或维护本地 Markdown Plan；用户明确要求只在对话中展示时不存盘。用户只要求生成计划、制定方案、给出计划或等价内容型输出，且没有 Plan 文档、文件、路径、存盘或更新语义时，默认在对话中输出。计划文档与评审报告均按 `Current Plan`、`Current Plan Document` 的统一绑定规则维护，具体文档动作和目标路径按 `Plan Persistence` 执行。
 
 ## 正文计划、用户特殊要求与后置评估的边界
 
@@ -135,14 +138,14 @@ Use these defined terms unchanged in normative instructions. A non-Plan document
 - 正文计划按 `references/plan-output-template.md` 的主干组织。
 - 用户特殊要求只能影响对应正文内容或后置评估，不得随意替换模板主干章节。
 - 用户特殊要求必须先分类再落位；目标章节和允许新增章节的位置读取 `references/plan-output-template.md`，本 Skill 不重复具体落位清单。
-- 若只是计划质量判断，只能进入“方案评估与建议”。
+- 生成或维护正式计划时的附带质量判断，只能进入“方案评估与建议”。
 - 文档操作相关特殊要求：按存盘、清理修订记录、最终版生成等规则执行，不新增正文评价章节。
-- 独立评审报告相关特殊要求：若用户的主要交付物是评估、评审或复核报告，而不是正式计划文档，可输出独立评估报告，不强制套用实现计划模板。
+- 独立评审报告相关特殊要求：若用户的主要交付物是评估、评审或复核报告，按 `references/review-guidelines.md` 和适用的 `references/review-output-template.md` 完成交付。
 
 
 ## 弹性原则
 
-- 工作流是正式规划的默认骨架，不是所有分析、核实和讨论请求的强制流水线；先根据用户当前目的与任务成熟度，判断应输出普通分析、探索性方案，还是正式计划。
+- 工作流是正式规划的默认骨架，不是所有分析、核实和讨论请求的强制流水线；先根据用户当前目的与任务成熟度，判断应输出普通分析、探索性方案、评审报告，还是正式计划。
 - 用户仅要求分析、核实、解释或探索方向，或者任务目标尚不足以形成实施边界时，优先输出事实结论、未知项、候选方向和必要的下一步；可给出阶段性分析、探索性方案或候选草图，但不强制套用正式计划模板，也不补写缺乏依据的实施细节、正式 Task 或 `Ready` 结论。
 - 对正式计划，允许根据任务复杂度裁剪、合并或扩展非核心章节，但不得与核心章节的固定要求冲突；在不丢失范围、分析结论、实现路径、验证和风险的前提下，允许调整输出结构与细节粒度。
 - 复杂任务可以阶段性收敛，但每个阶段都必须有明确边界、当前状态和继续条件。
@@ -164,7 +167,7 @@ Use these defined terms unchanged in normative instructions. A non-Plan document
 
 矫正原则：
 - 识别冲突、歧义、遗漏，并做适当的补充、取舍、矫正。
-- 选定实现口径，并说明选择理由与影响范围。
+- 明确当前任务口径，并说明选择理由与影响范围。
 - 在必要的时候，及时查阅当前任务相关的最新成文计划，最近的沟通记录、展示过的思考记录、推理记录、分析过程和相关决策等，以获取最新的上下文信息，确保需求校正的准确性和完整性。
 
 ## 规划工作流（可部分裁剪）
@@ -191,21 +194,37 @@ Use these defined terms unchanged in normative instructions. A non-Plan document
 
 ### 前置分析（默认执行）
 
-- 对源码和非源码改动，都从用户明确指定、任务直接涉及或计划直接修改的对象中选择任务触点，建立与当前任务直接相关的事实模型。
-- 从任务触点执行一次有界上收，检查能够共同解释、拥有、组织或直接约束这些触点的最小内聚分析单元；再只沿会改变方案范围、复用判断、风险判断或验证路径的必要直接关系扩展。具体证据问题闭合，或继续扩大不会改变方案时停止。
-- 初步阅读任务相关内容后，留意其中的相似结构和共同处理环节，结合相关部分分析其职责分工与协作方式，明确这些关系对本次修改的影响。
-- 按分析对象对范围、设计、风险和验证施加的决策压力调整深度：背景对象只作排除说明，相关对象说明现有机制及关系，直接约束方案的对象完成功能、职责或规则分析，决定整体边界的对象单列聚焦分析并检查任务相关内容的交汇。
-- 对源码改动，按 `references/analysis-relevance-grading.md` 把共用分析单元、直接关系和深度原则映射为 Coding 候选范围、`Low / Medium / High / Very High` 正式等级及最低输出义务。
-- 对非源码改动，按文档、规则、配置、资源或工作流自身结构映射分析单元和直接关系；不机械补写代码状态、生命周期、调用链、算法或接口细节，也不得因此跳过有界上收、相关性深度或交汇分析。
-- 将“前置分析”写入最终 plan 时，先满足与当前分析深度匹配的最低输出义务，再压缩为会影响方案边界、复用判断、风险判断和验证路径的事实、机制与约束结论；保留直接约束或决定方案的职责、规则、结构、状态、时序和交汇关系，不写无关背景、完整流程走读或阅读记录。
+#### 现状分析
 
-总体考量：
-- 这是方案收敛、边界判断、复用判断与风险判断的重要参考，不得视为可省略的附属步骤。
+- 对源码和非源码任务，都从用户明确指定、任务直接涉及、计划直接修改或需要评审的对象中选择任务触点，理解相关对象的现有功能、职责、运作机制及协作关系，形成它们对本次任务的支持、不足和约束等分析结论，为后续设计或评审判断提供依据。
+- 从任务触点执行一次有界上收，检查能够共同解释、拥有、组织或直接约束这些触点的最小内聚分析单元；再只沿会影响当前设计或评审判断的方案范围、复用判断、风险判断或验证路径等必要直接关系扩展。具体证据问题闭合，或继续扩大不会影响当前设计或评审判断时停止。
+- 初步阅读任务相关内容后，留意其中的相似结构和共同处理环节，结合相关部分分析其职责分工与协作方式，明确这些关系对本次任务的影响。
+- 按分析对象对范围、设计或评审结论、风险和验证施加的决策压力调整深度：背景对象只作排除说明，相关对象说明现有机制及关系，直接约束方案的对象完成功能、职责或规则分析，决定整体边界的对象单列聚焦分析并检查任务相关内容的交汇。
+- 对源码分析，按 `references/analysis-relevance-grading.md` 把共用分析单元、直接关系和深度原则映射为 Coding 候选范围、`Low / Medium / High / Very High` 正式等级及最低输出义务。
+- 对非源码任务，按文档、规则、配置、资源或工作流自身结构映射分析单元和直接关系；不机械补写代码状态、生命周期、调用链、算法或接口细节，也不得因此跳过有界上收、相关性深度或交汇分析。
+- 评审任务以被审查对象和评审问题确定范围，按相关内容对评审结论及其可靠性的影响选择深度；保留理解重要判断所需的机制、关系和依据。
+- 当相关分析需要汇总才能清楚呈现现状时，可结合本次任务集中说明当前对象的组织方式、关键职责及协作关系，形成对现状的整体理解。是否单列及展开程度按任务需要判断；简单内容或已有说明足够清楚时，无需重复汇总。
+- 将现状分析写入最终交付时，先满足与当前分析深度匹配的最低输出义务，再压缩为会影响方案边界、复用判断、评审结论、风险判断和验证路径的事实、机制与约束结论；保留直接约束或决定方案的职责、规则、结构、状态、时序和交汇关系，不写无关背景、完整流程走读或阅读记录。
+
+#### 外部资料搜集与研究（按需）
+
+按任务需要主动开展外部资料搜集与研究，包括联网查询。重要判断缺少依据、相关知识具有时效性或不确定性、已有方法可能提供有价值的参照，都是值得开展研究的情形；是否开展及研究问题、来源、范围和深度由 AI 自行判断。
+
+围绕任务查阅官方资料、类似实现或已有方法，提炼相关结论、适用条件及对本次任务的参考价值。此类研究属于前置分析，有关结论及主要来源进入最终交付；正式计划与完整评审报告均写入第 3 节，为后续设计或评审判断提供依据。
+
+#### 总体考量
+- 这是方案收敛、评审结论、边界判断、复用判断与风险判断的重要参考，不得视为可省略的附属步骤。
 - 先覆盖用户明确指定需要分析的内容。
 - 若 AI 判断还存在强相关的分析对象或直接关系，可补充最小必要的关联分析，但避免无关扩散。
 - 若用户未指定分析范围，则由 AI 根据任务触点、最小内聚分析单元和必要直接关系自行判断范围，并说明筛选依据。
-- 在讨论过程中发现新的强相关内容时，立即补充对应的“前置分析”并更新 `Current Plan`；新增事实或决策只重新分析受影响范围，再同步当前设计及下游内容。
-- 第 3 节聚焦“现状事实与约束结论”，第 4 节以后再展开“如何设计和修改”；避免把设计口径、猜测性推断或修改建议过早混进前置分析。
+- 讨论中发现新的强相关内容时，补充受影响范围的分析并同步当前交付；属于既有 `Current Plan` 的维护时，按协作契约更新相关设计和下游内容。
+- 正式计划与完整评审报告的第 3 节呈现现状分析结论，以及按需开展的外部研究结论；第 4 节以后分别展开设计与修改方案，或评审结论与处理建议。
+
+### 评审 Review
+
+纯评审在前置分析后进入评审判断，跳过设计思路、目标实现和任务拆分。核实影响判断的重要发现，形成整体评价和处理建议；共用流程的引用方式、评审差异、条目组织与完成条件按 `references/review-guidelines.md` 执行，完整报告按 `references/review-output-template.md` 组织。
+
+特别说明：评审、Review 等，本质上只是 `Current Plan` 的一种类型。它们和普通的开发计划、修复计划等常规任务计划没有本质区别，只是组织形式、任务重点等某些细节上的处理差别比较大。
 
 ### 设计思路
 
@@ -299,10 +318,12 @@ Use these defined terms unchanged in normative instructions. A non-Plan document
 ## 方案思考迭代流程
 
 每次方案分析、生成、完善、调整、核对或评审，都应结合任务复杂度、内容依赖以及方案阶段的逻辑先后关系决定是否分轮；简单且关联紧密的任务允许单轮完成，不为满足形式增加轮次。
-存在多个弱相关问题、未闭合证据、相互依赖的设计内容或需要回退复核时，再拆分为必要轮次；每轮结束后，检查是否仍存在会改变方案的范围覆盖缺口、事实或证据缺口、未闭合的关键决策或下游冲突；不存在时停止追加轮次。
+存在多个弱相关问题、未闭合证据、相互依赖的设计内容或需要回退复核时，再拆分为必要轮次；每轮结束后，检查是否仍存在会改变方案或评审结论的范围覆盖缺口、事实或证据缺口、未闭合的关键决策或下游冲突；不存在时停止追加轮次。
 
 这里的“轮次”用于组织 AI 当前的思考重点，不等同于聊天回合、用户确认或固定的工具调用步骤。
 分轮用于减少多个弱相关问题相互干扰，不限制完成当前判断所需的分析深度、关联信息或必要的回退调整。
+
+以下步骤用于方案生成；评审沿用调查、必要复核与按缺口迭代的原则，按评审完成条件收敛。
 
 - 方案生成流程应从明确任务边界和目标开始。
 - 随后进行任务矫正和前置分析的准备工作。
@@ -367,19 +388,21 @@ Use these defined terms unchanged in normative instructions. A non-Plan document
 
 ## 质量检查清单
 
+按当前交付物选择适用项：共用调查与分析要求始终按任务应用；设计、Target、Task、Ready 与计划后置评估检查用于实际规划范围，独立评审按评审专项要求检查。
+
 - 按“防止过度防御”检查：是否把局部流程的内部步骤误当成独立入口，为假设的跳步、乱序调用重复安排校验与兜底。
 
-- 输出不空泛，关键点均落到具体系统或模块。
+- 输出不空泛，关键点落到具体对象及相关行为、规则或关系。
+- 评审范围与依据清楚，重要判断有必要分析支撑，结论、建议和待核实事项相互一致。
 - 检查 `4.1 设计思路` 是否包含与任务复杂度相称的设计内容，子标题是否使用明确的“……设计”名称，设计是否与当前有效的 Decided 记录和 Target 一致，以及 Open 决策或阻塞性事实缺口是否错误进入 Target 或 Task。
 - 检查章节、`Target`、`Task` 字段和后置评估是否匹配实际改动类型；只在出现对应源码维度时检查源码 Task、算法/接口、命名和注释要求。
 - 命中设计决策记录加载条件时，按 `references/decision-record-rules.md` 检查准入、AI/User 决策责任、状态、当前结果和下游收敛。
 - 需要用户介入时，检查“方案评估与建议”是否明确介入类型、原因、影响范围、最小问题和回复后的正文同步位置。
-- 对所有前置分析，检查是否从任务触点完成有界上收和必要直接关系分析，是否按对象对范围、设计、风险和验证的决策压力选择深度，以及直接约束或决定方案的交汇关系是否形成结论。
-- 对源码前置分析的 Coding 候选范围、正式等级、最低深度、明确对标内容和正文写法，再分别按 `references/analysis-relevance-grading.md` 与 `references/pre-analysis-writing-guide.md` 检查；对非源码正式 plan，按共用分析原则、目标对象结构、模板字段和适用的验证口径检查，普通非源码分析按当前交付目标检查。
+- 对前置分析中的现状分析，检查是否从任务触点完成有界上收和必要直接关系分析，是否按对象对范围、设计或评审结论、风险和验证的决策压力选择深度，以及直接约束或决定方案的交汇关系是否形成结论。
+- 对源码现状分析的 Coding 候选范围、正式等级、最低深度、明确对标内容和正文写法，再分别按 `references/analysis-relevance-grading.md` 与 `references/pre-analysis-writing-guide.md` 检查；源码评审沿用范围发现与相关性分级，以对评审判断的影响解释深度与输出义务；对非源码正式 plan，按共用分析原则、目标对象结构、模板字段和适用的验证口径检查，普通非源码分析按当前交付目标检查。
 - 检查当前设计形成后，是否主动识别并适当细化了其中需要重点说明的核心内容或复杂设计；已细化内容是否足以说明当前任务真正需要的关键关系、主要步骤、重要边界和实现影响，未命中的内容是否避免机械扩写。采用或融合外部方案时，再检查来源和采用关系。
 - 检查关键内容是否被空泛动作词替代，并同时检查是否因追求形式完整而机械增加字段、伪代码、调用时序或图。
-- Bug 任务必须包含复现条件、根因假设、最小修复点与回归风险。
-- 包含至少一个主要风险及对应规避或回退措施。
+- Bug 修复规划必须包含复现条件、根因假设、最小修复点与回归风险；评审发现 Bug 时按评审专项说明完成必要定位与建议。
 - 所有关键假设均可追溯到对应的缺失信息。
 - 检查能力受限资源是否记录了责任、落地方式、依赖、验收证据和 readiness 影响；仅在不影响核心目标与验收闭环时判为非阻塞。
 - 涉及源码命名或注释时，检查名称是否反映对象自身职责并保留必要契约；注释是否只补充非显然的职责/原因、约束/边界、顺序/生效、失败/清理或误用风险；避免按有限场景机械命名、用注释补偿模糊结构、或对自解释代码逐行复述。

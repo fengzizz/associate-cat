@@ -1,11 +1,11 @@
 # 计划实施规范
 
-本文件只补 Plan 的选择、状态、依赖、产物与写回。共用授权、范围、计划遵从、停止和验证规则遵守主 Skill；结果核对见 `plan-code-handoff.md`。
+本文件负责实施计划的选择、状态、依赖、产物与进度写回。Current Plan 的具体内容由事务类型决定；实施工作按用户授权的目标采用实施计划，或遵循主 Skill 的明确直接请求路线。共用授权、范围、计划遵从、停止和验证规则遵守主 Skill；结果核对见 `plan-code-handoff.md`。
 
 ## Core Concepts
 
-- **Current Plan**: The single logical Plan state for one active planning task. It is created for that task or adopted from an existing Plan when Direct User Request Prose explicitly designates that Plan for continued maintenance. Adopting a Plan as implementation scope does not make it writable.
-- **Current Plan Document**: The single persisted Plan document that carries the Current Plan for one active planning task. Current Plan progress write-back requires both an explicit progress-save request and an unambiguous Current Plan Document. A non-Plan document, including a documentation file explicitly included in implementation scope, is never a Current Plan Document.
+- **Current Plan**: The current working state for one active task. Its content and deliverable structure follow the task type, including review, planning, or Bug analysis and fix planning. It may be maintained in the conversation or persisted in a document.
+- **Current Plan Document**: The document bound to and carrying the Current Plan for that task. The binding is established by first persistence requested for the task or by Direct User Request Prose designating an existing deliverable for continued maintenance.
 
 ## 输入与任务选择
 
