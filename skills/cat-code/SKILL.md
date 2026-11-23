@@ -27,6 +27,7 @@ This section changes language inference and user-authorization inference only. I
 - 用户采用正式 Plan 或带有任务状态与依赖的任务清单时，读取 `references/plan-implementation.md` 和 `references/plan-code-handoff.md`，复用选中范围的设计、约束、任务和验收。
 - 只有明确目标或可执行修改意见、没有正式 Task 协议的材料，按直接请求处理，保留必要来源；背景材料不触发计划交接，也不能借直接请求路线绕过显式 Not Ready 或 Open。
 - 只在缺少可发现的施工事实时读取 `references/implementation-baseline.md` 的相关章节。已有依据直接复用，不因缺模板字段、多文件或较大 diff 重建基线或启动规划。
+- 仅当当前任务需要修改源码时，在开始相关改动前完整读取[防止过度防御](references/defensive-coding.md)。混合任务在进入源码改动部分时读取。
 - 项目语言、框架、代码风格、构建和测试规则从当前项目自身发现，不在本 Skill 中预设或复制。
 - 按 `Language Authority and User-Controlled Scope` 先解析 `Interaction Language`，再为每个实际写回的 Plan/文档分别解析 `Output Artifact Language`。输入 Plan 的主语言只是 `Source Artifact Language`；除非本轮明确写回该 Plan，否则它不成为 output artifact，也不得覆盖 `Interaction Language`。既有维护对象在用户未明确指定该 artifact 语言时保持其主语言；新建交付物在用户未明确指定时采用 `Interaction Language`。
 - 预检、进度、阻塞、计划项映射、双向核对、Validation 说明和交付摘要默认属于对话表面，使用 `Interaction Language`；只有用户明确要求写入某个文档时，该区块才使用该文档的 `Output Artifact Language`。
@@ -59,15 +60,6 @@ This section changes language inference and user-authorization inference only. I
 - 优先局部、直接的修改，复用项目现有模式；先处理真实接口和调用点，避免无收益的 helper、日志、包装和抽象，不把 DRY 作为默认目标。
 - 遵照已有文件的编码、换行和主体结构，除任务要求外不重排或整文件改写；骨架或占位实现可在范围内补全。
 - 命名和注释遵守项目规则；注释只补充名称与结构不能表达的必要职责、原因、约束或误用风险，避免逐行复述。
-
-## 防止过度防御
-
-- 按完整局部功能流程理解调用链，沿用前序已建立且仍成立的条件；不要因函数拆分、跨模块、跨语言调用或回调，就重复校验、重查状态或补默认值。
-- 内部步骤按其职责和既定顺序实现，不为假设中的跳步、乱序或任意重复调用逐层兜底。数据准备或顺序有误时，在授权范围内修正该位置，不在各使用点静默返回来掩盖问题。
-- 实际允许独立调用的入口，或某次操作确实可能使已有条件失效时，只处理受影响的条件，不因出现回调或异步就重跑整套检查。保留正常业务分支和已有失败行为。
-- 有无 Plan 均遵守上述规则。有 Plan 时，不改变目标和关键约束的局部微调沿用既有规则，实质设计冲突停止相关实施并报告；无 Plan 时在直接请求范围内落实。
-- 在已有 diff 核对中删减这些多余逻辑，不换成同量 helper、断言或日志，不新增逐检查报告或审查轮次。
-
 
 ## 实现工作流
 
